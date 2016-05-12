@@ -59,6 +59,7 @@ static void setup_idempotent() {
 }
 
 - (void) run {
+    NSLog(@"a");
     setup_idempotent();
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
@@ -94,11 +95,12 @@ static void setup_idempotent() {
 }
 
 -(void) run {
+    NSLog(@"b");
     setup_idempotent();
     mk::ooni::HttpInvalidRequestLineTest()
     .set_backend("http://www.google.com/")
     .set_verbosity(1)
-    .set_options("dns/nameserver", "8.8.8.1")
+    .set_options("dns/nameserver", "8.8.8.8")
     .on_log([self](uint32_t, const char *s) {
         // XXX OK to send messages to object from another thread?
         NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
@@ -128,6 +130,8 @@ static void setup_idempotent() {
 }
 
 -(void) run {
+    NSLog(@"c");
+
     setup_idempotent();
 
     NSBundle *bundle = [NSBundle mainBundle];
@@ -136,8 +140,8 @@ static void setup_idempotent() {
     mk::ooni::TcpConnectTest()
     .set_port("80")
     .set_input_file_path([path UTF8String])
-    .set_verbosity(1)
-    .set_options("dns/nameserver", "8.8.8.1")
+    .set_verbosity(2)
+    .set_options("dns/nameserver", "8.8.8.8")
     .on_log([self](uint32_t, const char *s) {
         NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
                              [NSString stringWithUTF8String:s]];
