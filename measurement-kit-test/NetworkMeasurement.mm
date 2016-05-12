@@ -16,35 +16,11 @@ static void setup_idempotent() {
     if (!initialized) {
 
         // Set the logger verbose and make sure it logs on the "logcat"
-        mk::set_verbose(1);
+        mk::set_verbosity(1);
         // XXX Ok to call NSLog() from another thread?
-        mk::on_log([](const char *s) {
+        mk::on_log([](uint32_t, const char *s) {
             NSLog(@"%s", s);
         });
-
-        // Copy DNS resolver(s) from device
-        // This code copied from the iOS tutorial
-        // XXX This should run before every test but to do this we need
-        // to further change measurement-kit DNS code
-        res_state res = nullptr;
-        do {
-            res = (res_state) malloc(sizeof(struct __res_state));
-            if (res == nullptr) break;
-            if (res_ninit(res) != 0) break;
-            mk::clear_nameservers();
-            for (int i = 0; i < res->nscount; ++i) {
-                char addr[INET_ADDRSTRLEN];
-                if (inet_ntop(AF_INET, &res->nsaddr_list[i].sin_addr, addr,
-                            sizeof (addr)) == nullptr) {
-                    continue;
-                }
-                mk::add_nameserver(addr);
-                NSLog(@"adding DNS resolver: %s", addr);
-            }
-            free(res);
-            res = nullptr;
-        } while (0);
-        if (res) free(res);
 
         // Remember that we have initialized
         initialized = true;
@@ -89,8 +65,8 @@ static void setup_idempotent() {
     mk::ooni::DnsInjectionTest()
         .set_backend("8.8.8.8:53")
         .set_input_file_path([path UTF8String])
-        .set_verbose()
-        .on_log([self](const char *s) {
+        .set_verbosity(1)
+        .on_log([self](uint32_t, const char *s) {
             NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate], [NSString stringWithUTF8String:s]];
             NSLog(@"%s", s);
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -121,8 +97,9 @@ static void setup_idempotent() {
     setup_idempotent();
     mk::ooni::HttpInvalidRequestLineTest()
     .set_backend("http://www.google.com/")
-    .set_verbose()
-    .on_log([self](const char *s) {
+    .set_verbosity(1)
+    .set_options("dns/nameserver", "8.8.8.1")
+    .on_log([self](uint32_t, const char *s) {
         // XXX OK to send messages to object from another thread?
         NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
                              [NSString stringWithUTF8String:s]];
@@ -159,8 +136,9 @@ static void setup_idempotent() {
     mk::ooni::TcpConnectTest()
     .set_port("80")
     .set_input_file_path([path UTF8String])
-    .set_verbose()
-    .on_log([self](const char *s) {
+    .set_verbosity(1)
+    .set_options("dns/nameserver", "8.8.8.1")
+    .on_log([self](uint32_t, const char *s) {
         NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
                              [NSString stringWithUTF8String:s]];
         NSLog(@"%s", s);

@@ -1,4 +1,8 @@
 platform :ios, '9.0'
 
-pod 'MBProgressHUD'
-pod 'measurement_kit', '~> 0.1.2'
+target 'measurement-kit-test' do
+  pod 'MBProgressHUD'
+  pod 'measurement_kit',
+    :git => 'https://github.com/measurement-kit/measurement-kit.git',
+    :branch => 'feature/ndt'
+end
