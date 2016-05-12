@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06946C5E1CE51982001DCD0B /* cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 06946C5D1CE51982001DCD0B /* cert.pem */; };
 		BF5693B931326FF43B26C47F /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */; };
 		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
 		EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06946C5D1CE51982001DCD0B /* cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cert.pem; sourceTree = "<group>"; };
 		3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-measurement-kit-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.release.xcconfig"; sourceTree = "<group>"; };
 		E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				EDBC90E51CE34BCB00CC20CF /* hosts.txt */,
+				06946C5D1CE51982001DCD0B /* cert.pem */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				EDBC90E61CE34BCB00CC20CF /* hosts.txt in Resources */,
 				EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */,
+				06946C5E1CE51982001DCD0B /* cert.pem in Resources */,
 				EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */,
 				EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */,
 			);

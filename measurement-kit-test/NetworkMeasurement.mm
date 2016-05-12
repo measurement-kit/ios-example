@@ -4,6 +4,7 @@
 
 #import "NetworkMeasurement.h"
 
+#import "measurement_kit/ndt.hpp"
 #import "measurement_kit/common.hpp"
 
 #include <arpa/inet.h>
@@ -134,6 +135,7 @@ static void setup_idempotent() {
 
     setup_idempotent();
 
+#if 0
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
 
@@ -157,6 +159,18 @@ static void setup_idempotent() {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
         });
     });
+#endif
+
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"cert" ofType:@"pem"];
+
+    // XXX blocking - but that's at least a starting point
+    mk::ndt::run([](mk::Error) {
+        mk::break_loop();
+    }, {
+        {"net/ca_bundle_path", [path UTF8String]},
+    });
+    mk::loop();
 }
 
 @end
