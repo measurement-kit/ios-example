@@ -1,713 +1,411 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>5CA3B24C6AC9D6376357B091</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90E21CE34B6E00CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90BC1CE341B400CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90C71CE341B700CC20CF</string>
-				<string>EDBC90C61CE341B400CC20CF</string>
-				<string>5CA3B24C6AC9D6376357B091</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90BD1CE341B400CC20CF</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0730</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Measurement kit</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>EDBC90C41CE341B400CC20CF</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>7.3.1</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>EDBC90C01CE341B400CC20CF</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>EDBC90BC1CE341B400CC20CF</string>
-			<key>productRefGroup</key>
-			<string>EDBC90C61CE341B400CC20CF</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>EDBC90C41CE341B400CC20CF</string>
-			</array>
-		</dict>
-		<key>EDBC90C01CE341B400CC20CF</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EDBC90DA1CE341B800CC20CF</string>
-				<string>EDBC90DB1CE341B800CC20CF</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EDBC90C11CE341B400CC20CF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EDBC90D01CE341B800CC20CF</string>
-				<string>EDBC90E11CE344A300CC20CF</string>
-				<string>EDBC90CD1CE341B800CC20CF</string>
-				<string>EDBC90CA1CE341B700CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EDBC90C21CE341B400CC20CF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EDBC90E31CE34B6E00CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EDBC90C31CE341B400CC20CF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EDBC90E61CE34BCB00CC20CF</string>
-				<string>EDBC90D81CE341B800CC20CF</string>
-				<string>EDBC90D51CE341B800CC20CF</string>
-				<string>EDBC90D31CE341B800CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EDBC90C41CE341B400CC20CF</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>EDBC90DC1CE341B800CC20CF</string>
-			<key>buildPhases</key>
-			<array>
-				<string>EDBC90C11CE341B400CC20CF</string>
-				<string>EDBC90C21CE341B400CC20CF</string>
-				<string>EDBC90C31CE341B400CC20CF</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>measurement-kit-test</string>
-			<key>productName</key>
-			<string>measurement-kit-test</string>
-			<key>productReference</key>
-			<string>EDBC90C51CE341B400CC20CF</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>EDBC90C51CE341B400CC20CF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>measurement-kit-test.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EDBC90C61CE341B400CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90C51CE341B400CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90C71CE341B700CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90E41CE34BCB00CC20CF</string>
-				<string>EDBC90CB1CE341B800CC20CF</string>
-				<string>EDBC90CC1CE341B800CC20CF</string>
-				<string>EDBC90CE1CE341B800CC20CF</string>
-				<string>EDBC90CF1CE341B800CC20CF</string>
-				<string>EDBC90DF1CE344A300CC20CF</string>
-				<string>EDBC90E01CE344A300CC20CF</string>
-				<string>EDBC90D11CE341B800CC20CF</string>
-				<string>EDBC90D41CE341B800CC20CF</string>
-				<string>EDBC90D61CE341B800CC20CF</string>
-				<string>EDBC90D91CE341B800CC20CF</string>
-				<string>EDBC90C81CE341B700CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>measurement-kit-test</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90C81CE341B700CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90C91CE341B700CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90C91CE341B700CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90CA1CE341B700CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90C91CE341B700CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90CB1CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90CC1CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.objcpp</string>
-			<key>path</key>
-			<string>AppDelegate.mm</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90CD1CE341B800CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90CC1CE341B800CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90CE1CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90CF1CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.objcpp</string>
-			<key>path</key>
-			<string>ViewController.mm</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D01CE341B800CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90CF1CE341B800CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90D11CE341B800CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90D21CE341B800CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D21CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D31CE341B800CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90D11CE341B800CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90D41CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Assets.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D51CE341B800CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90D41CE341B800CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90D61CE341B800CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90D71CE341B800CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D71CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90D81CE341B800CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90D61CE341B800CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90D91CE341B800CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90DA1CE341B800CC20CF</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.3</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EDBC90DB1CE341B800CC20CF</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.3</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EDBC90DC1CE341B800CC20CF</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EDBC90DD1CE341B800CC20CF</string>
-				<string>EDBC90DE1CE341B800CC20CF</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EDBC90DD1CE341B800CC20CF</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>INFOPLIST_FILE</key>
-				<string>measurement-kit-test/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.github.measurement-kit-test</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EDBC90DE1CE341B800CC20CF</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>INFOPLIST_FILE</key>
-				<string>measurement-kit-test/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>com.github.measurement-kit-test</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EDBC90DF1CE344A300CC20CF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>NetworkMeasurement.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90E01CE344A300CC20CF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.objcpp</string>
-			<key>path</key>
-			<string>NetworkMeasurement.mm</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90E11CE344A300CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90E01CE344A300CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90E21CE34B6E00CC20CF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.text-based-dylib-definition</string>
-			<key>name</key>
-			<string>libresolv.9.tbd</string>
-			<key>path</key>
-			<string>usr/lib/libresolv.9.tbd</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>EDBC90E31CE34B6E00CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90E21CE34B6E00CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EDBC90E41CE34BCB00CC20CF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBC90E51CE34BCB00CC20CF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fixtures</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90E51CE34BCB00CC20CF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>hosts.txt</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBC90E61CE34BCB00CC20CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDBC90E51CE34BCB00CC20CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>EDBC90BD1CE341B400CC20CF</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF5693B931326FF43B26C47F /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */; };
+		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
+		EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */; };
+		EDBC90D01CE341B800CC20CF /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CF1CE341B800CC20CF /* ViewController.mm */; };
+		EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D11CE341B800CC20CF /* Main.storyboard */; };
+		EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D41CE341B800CC20CF /* Assets.xcassets */; };
+		EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */; };
+		EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */; };
+		EDBC90E31CE34B6E00CC20CF /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */; };
+		EDBC90E61CE34BCB00CC20CF /* hosts.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90E51CE34BCB00CC20CF /* hosts.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-measurement-kit-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.release.xcconfig"; sourceTree = "<group>"; };
+		E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.debug.xcconfig"; sourceTree = "<group>"; };
+		EDBC90C51CE341B400CC20CF /* measurement-kit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "measurement-kit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDBC90C91CE341B700CC20CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EDBC90CB1CE341B800CC20CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		EDBC90CE1CE341B800CC20CF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EDBC90CF1CE341B800CC20CF /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		EDBC90D21CE341B800CC20CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDBC90D41CE341B800CC20CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EDBC90D71CE341B800CC20CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EDBC90D91CE341B800CC20CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMeasurement.h; sourceTree = "<group>"; };
+		EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkMeasurement.mm; sourceTree = "<group>"; };
+		EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		EDBC90E51CE34BCB00CC20CF /* hosts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hosts.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EDBC90C21CE341B400CC20CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBC90E31CE34B6E00CC20CF /* libresolv.9.tbd in Frameworks */,
+				BF5693B931326FF43B26C47F /* libPods-measurement-kit-test.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4DB6BAADDC044FDA77D9750F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */,
+				8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5CA3B24C6AC9D6376357B091 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */,
+				3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDBC90BC1CE341B400CC20CF = {
+			isa = PBXGroup;
+			children = (
+				EDBC90C71CE341B700CC20CF /* measurement-kit-test */,
+				EDBC90C61CE341B400CC20CF /* Products */,
+				5CA3B24C6AC9D6376357B091 /* Frameworks */,
+				4DB6BAADDC044FDA77D9750F /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		EDBC90C61CE341B400CC20CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EDBC90C51CE341B400CC20CF /* measurement-kit-test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EDBC90C71CE341B700CC20CF /* measurement-kit-test */ = {
+			isa = PBXGroup;
+			children = (
+				EDBC90E41CE34BCB00CC20CF /* fixtures */,
+				EDBC90CB1CE341B800CC20CF /* AppDelegate.h */,
+				EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */,
+				EDBC90CE1CE341B800CC20CF /* ViewController.h */,
+				EDBC90CF1CE341B800CC20CF /* ViewController.mm */,
+				EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */,
+				EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */,
+				EDBC90D11CE341B800CC20CF /* Main.storyboard */,
+				EDBC90D41CE341B800CC20CF /* Assets.xcassets */,
+				EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */,
+				EDBC90D91CE341B800CC20CF /* Info.plist */,
+				EDBC90C81CE341B700CC20CF /* Supporting Files */,
+			);
+			path = "measurement-kit-test";
+			sourceTree = "<group>";
+		};
+		EDBC90C81CE341B700CC20CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDBC90C91CE341B700CC20CF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDBC90E41CE34BCB00CC20CF /* fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				EDBC90E51CE34BCB00CC20CF /* hosts.txt */,
+			);
+			path = fixtures;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EDBC90C41CE341B400CC20CF /* measurement-kit-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDBC90DC1CE341B800CC20CF /* Build configuration list for PBXNativeTarget "measurement-kit-test" */;
+			buildPhases = (
+				AE1024B71DA416DD1C17BA61 /* 📦 Check Pods Manifest.lock */,
+				EDBC90C11CE341B400CC20CF /* Sources */,
+				EDBC90C21CE341B400CC20CF /* Frameworks */,
+				EDBC90C31CE341B400CC20CF /* Resources */,
+				F2123EAB96C1D23E68707250 /* 📦 Embed Pods Frameworks */,
+				095BA30639A375C806B768BB /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "measurement-kit-test";
+			productName = "measurement-kit-test";
+			productReference = EDBC90C51CE341B400CC20CF /* measurement-kit-test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDBC90BD1CE341B400CC20CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Measurement kit";
+				TargetAttributes = {
+					EDBC90C41CE341B400CC20CF = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = EDBC90C01CE341B400CC20CF /* Build configuration list for PBXProject "measurement-kit-test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EDBC90BC1CE341B400CC20CF;
+			productRefGroup = EDBC90C61CE341B400CC20CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EDBC90C41CE341B400CC20CF /* measurement-kit-test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EDBC90C31CE341B400CC20CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBC90E61CE34BCB00CC20CF /* hosts.txt in Resources */,
+				EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */,
+				EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */,
+				EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		095BA30639A375C806B768BB /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE1024B71DA416DD1C17BA61 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F2123EAB96C1D23E68707250 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EDBC90C11CE341B400CC20CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBC90D01CE341B800CC20CF /* ViewController.mm in Sources */,
+				EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */,
+				EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */,
+				EDBC90CA1CE341B700CC20CF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EDBC90D11CE341B800CC20CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDBC90D21CE341B800CC20CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDBC90D71CE341B800CC20CF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EDBC90DA1CE341B800CC20CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EDBC90DB1CE341B800CC20CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EDBC90DD1CE341B800CC20CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.measurement-kit-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EDBC90DE1CE341B800CC20CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.measurement-kit-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EDBC90C01CE341B400CC20CF /* Build configuration list for PBXProject "measurement-kit-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBC90DA1CE341B800CC20CF /* Debug */,
+				EDBC90DB1CE341B800CC20CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDBC90DC1CE341B800CC20CF /* Build configuration list for PBXNativeTarget "measurement-kit-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBC90DD1CE341B800CC20CF /* Debug */,
+				EDBC90DE1CE341B800CC20CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EDBC90BD1CE341B400CC20CF /* Project object */;
+}
