@@ -64,7 +64,7 @@ static void setup_idempotent() {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
     mk::ooni::DnsInjectionTest()
-        .set_backend("8.8.8.8:53")
+        .set_options("backend", "8.8.8.8:53")
         .set_input_file_path([path UTF8String])
         .set_verbosity(1)
         .on_log([self](uint32_t, const char *s) {
@@ -98,7 +98,7 @@ static void setup_idempotent() {
     NSLog(@"b");
     setup_idempotent();
     mk::ooni::HttpInvalidRequestLineTest()
-    .set_backend("http://www.google.com/")
+    .set_options("backend", "http://www.google.com/")
     .set_verbosity(1)
     .set_options("dns/nameserver", "8.8.8.8")
     .on_log([self](uint32_t, const char *s) {
@@ -138,7 +138,7 @@ static void setup_idempotent() {
     NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
 
     mk::ooni::TcpConnectTest()
-    .set_port("80")
+    .set_options("port", "80")
     .set_input_file_path([path UTF8String])
     .set_verbosity(2)
     .set_options("dns/nameserver", "8.8.8.8")
