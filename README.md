@@ -9,6 +9,6 @@ iOS devices, as well as other dependencies, and open the Xcode workspace
 where the app, MK, and said depeendencies would be compiled.
 
 ```
-pod install
+pod install --verbose
 open measurement-kit-test.xcworkspace
 ```
