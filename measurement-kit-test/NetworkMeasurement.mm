@@ -135,6 +135,7 @@ static void setup_idempotent() {
 
     setup_idempotent();
 
+    // TODO: should cleanup the commented out code
 #if 0
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
@@ -164,13 +165,28 @@ static void setup_idempotent() {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"cert" ofType:@"pem"];
 
-    // XXX blocking - but that's at least a starting point
-    mk::ndt::run([](mk::Error) {
-        mk::break_loop();
-    }, {
-        {"net/ca_bundle_path", [path UTF8String]},
+    // FIXME: apparently the simulator does not cope well with receiving
+    // a signal of type SIGPIPE when the debugger is attached
+    // See http://stackoverflow.com/questions/1294436
+
+    mk::ndt::NdtTest()
+    .set_options("net/ca_bundle_path", [path UTF8String])
+    .set_verbosity(/* 2 */ 1)
+    .on_log([self](uint32_t, const char *s) {
+        NSString *current = [NSString stringWithFormat:@"%@",
+                             [NSString stringWithUTF8String:s]];
+        NSLog(@"%s", s);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.logLines addObject:current];
+        });
+    })
+    .set_options("dns/nameserver", "8.8.8.8")
+    .run([self]() {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.finished = TRUE;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
+        });
     });
-    mk::loop();
 }
 
 @end
