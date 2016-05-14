@@ -2,7 +2,8 @@
 
 Instructions for building the experimental barebone [Measurement
 Kit](https://github.com/measurement-kit/measurement-kit) (MK)
-iOS app with support for the NDT network performance tests.
+iOS app with support for the [NDT network performance
+test](https://github.com/ndt-project/ndt/).
 
 ## Dependencies
 
