@@ -61,3 +61,6 @@ attached to the debugger, the debugger will nonetheless pause upon the
 receipt of such signal. My suggestion is to instruct Xcode to run the
 app on a device and then, once the app is installed on device, disconnect
 the device from your computer and run from device.
+
+The NDT implementation of MK does not know yet how to retry with busy
+servers, hence in such case the test terminates with an error.
