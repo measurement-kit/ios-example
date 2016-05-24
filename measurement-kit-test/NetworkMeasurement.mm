@@ -162,15 +162,12 @@ static void setup_idempotent() {
     });
 #endif
 
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:@"cert" ofType:@"pem"];
-
     // FIXME: apparently the simulator does not cope well with receiving
     // a signal of type SIGPIPE when the debugger is attached
     // See http://stackoverflow.com/questions/1294436
 
     mk::ndt::NdtTest()
-    .set_options("net/ca_bundle_path", [path UTF8String])
+    .set_options("mlabns.base_url", "http://mlab-ns.appspot.com/") //XXX should be mlabns/base_url
     .set_verbosity(/* 2 */ 1)
     .on_log([self](uint32_t, const char *s) {
         NSString *current = [NSString stringWithFormat:@"%@",
