@@ -167,14 +167,16 @@ static void setup_idempotent() {
     // See http://stackoverflow.com/questions/1294436
 
     mk::ndt::NdtTest()
-    .set_options("mlabns.base_url", "http://mlab-ns.appspot.com/") //XXX should be mlabns/base_url
-    .set_verbosity(/* 2 */ 1)
+    .set_options("mlabns/base_url", "http://mlab-ns.appspot.com/")
+    .set_options("test_suite", MK_NDT_DOWNLOAD)
+    .set_verbosity(1)
     .on_log([self](uint32_t, const char *s) {
         NSString *current = [NSString stringWithFormat:@"%@",
                              [NSString stringWithUTF8String:s]];
         NSLog(@"%s", s);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.logLines addObject:current];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
         });
     })
     .set_options("dns/nameserver", "8.8.8.8")

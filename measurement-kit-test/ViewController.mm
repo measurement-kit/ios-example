@@ -32,6 +32,7 @@
 - (IBAction)runTest:(id)sender{
     [self.runButton setEnabled:NO];
     [self.logView setText:@""];
+    self.logView.editable = false;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     int test = 1;
     if (test == 0){
