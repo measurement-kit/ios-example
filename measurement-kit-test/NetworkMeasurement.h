@@ -4,11 +4,6 @@
 
 #import <Foundation/Foundation.h>
 
-/*Include header from test*/
-#include <measurement_kit/ooni.hpp>
-
-#include <measurement_kit/common.hpp>
-
 @interface NetworkMeasurement : NSObject
 
 @property NSString *name;
@@ -16,17 +11,10 @@
 @property NSString *status;
 @property BOOL finished;
 @property NSMutableArray *logLines;
-@property mk::Settings options;
 
 -(void) run;
+
 @end
 
-
-@interface HTTPInvalidRequestLine : NetworkMeasurement
-@end
-
-@interface DNSInjection : NetworkMeasurement
-@end
-
-@interface TCPConnect : NetworkMeasurement
+@interface NdtTest : NetworkMeasurement
 @end

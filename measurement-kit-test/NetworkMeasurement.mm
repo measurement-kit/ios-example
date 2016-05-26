@@ -3,189 +3,56 @@
 // information on the copying conditions.
 
 #import "NetworkMeasurement.h"
-
 #import "measurement_kit/ndt.hpp"
-#import "measurement_kit/common.hpp"
-
-#include <arpa/inet.h>
-#include <ifaddrs.h>
-#include <resolv.h>
-#include <dns.h>
-
-static void setup_idempotent() {
-    static bool initialized = false;
-    if (!initialized) {
-
-        // Set the logger verbose and make sure it logs on the "logcat"
-        mk::set_verbosity(1);
-        // XXX Ok to call NSLog() from another thread?
-        mk::on_log([](uint32_t, const char *s) {
-            NSLog(@"%s", s);
-        });
-
-        // Remember that we have initialized
-        initialized = true;
-    }
-}
 
 @implementation NetworkMeasurement
 
 -(id) init {
     self = [super init];
     self.logLines = [[NSMutableArray alloc] init];
-    self.finished = FALSE;
+    self.finished = false;
+    return self;
+}
+
+-(void) run { /* to be overriden */ }
+
+@end
+
+@implementation NdtTest : NetworkMeasurement
+
+-(id) init {
+    self = [super init];
+    self.name = @"ndt";
     return self;
 }
 
 -(void) run {
-    // Nothing to do here
-}
-
--(NSString*) getDate{
-    NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];
-    [dateformatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    return [dateformatter stringFromDate:[NSDate date]];
-}
-
-
-@end
-
-
-@implementation DNSInjection : NetworkMeasurement
-
--(id) init {
-    self = [super init];
-    self.name = @"dns_injection";
-    return self;
-}
-
-- (void) run {
-    NSLog(@"a");
-    setup_idempotent();
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
-    mk::ooni::DnsInjectionTest()
-        .set_options("backend", "8.8.8.8:53")
-        .set_input_file_path([path UTF8String])
-        .set_verbosity(1)
-        .on_log([self](uint32_t, const char *s) {
-            NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate], [NSString stringWithUTF8String:s]];
-            NSLog(@"%s", s);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
-            });
-        })
-        .run([self]() {
-            NSLog(@"dns_injection testEnded");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.finished = TRUE;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
-            });
-        });
-}
-
-
-@end
-
-@implementation HTTPInvalidRequestLine : NetworkMeasurement
-
--(id) init {
-    self = [super init];
-    self.name = @"http_invalid_request_line";
-    return self;
-}
-
--(void) run {
-    NSLog(@"b");
-    setup_idempotent();
-    mk::ooni::HttpInvalidRequestLineTest()
-    .set_options("backend", "http://www.google.com/")
-    .set_verbosity(1)
-    .set_options("dns/nameserver", "8.8.8.8")
-    .on_log([self](uint32_t, const char *s) {
-        // XXX OK to send messages to object from another thread?
-        NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
-                             [NSString stringWithUTF8String:s]];
-        NSLog(@"%s", s);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.logLines addObject:current];
-        });
-    })
-    .run([self]() {
-        NSLog(@"http_invalid_request_line testEnded");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.finished = TRUE;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
-        });
-    });
-}
-
-@end
-
-@implementation TCPConnect : NetworkMeasurement
-
--(id) init {
-    self = [super init];
-    self.name = @"tcp_connect";
-    return self;
-}
-
--(void) run {
-    NSLog(@"c");
-
-    setup_idempotent();
-
-    // TODO: should cleanup the commented out code
-#if 0
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:@"hosts" ofType:@"txt"];
-
-    mk::ooni::TcpConnectTest()
-    .set_options("port", "80")
-    .set_input_file_path([path UTF8String])
-    .set_verbosity(2)
-    .set_options("dns/nameserver", "8.8.8.8")
-    .on_log([self](uint32_t, const char *s) {
-        NSString *current = [NSString stringWithFormat:@"%@: %@", [super getDate],
-                             [NSString stringWithUTF8String:s]];
-        NSLog(@"%s", s);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.logLines addObject:current];
-        });
-    })
-    .run([self]() {
-        NSLog(@"tcp_connect testEnded");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.finished = TRUE;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
-        });
-    });
-#endif
-
-    // FIXME: apparently the simulator does not cope well with receiving
+    // Note: the emulator does not cope well with receiving
     // a signal of type SIGPIPE when the debugger is attached
     // See http://stackoverflow.com/questions/1294436
 
     mk::ndt::NdtTest()
-    .set_options("mlabns/base_url", "http://mlab-ns.appspot.com/")
-    .set_options("test_suite", MK_NDT_DOWNLOAD)
-    .set_verbosity(1)
-    .on_log([self](uint32_t, const char *s) {
-        NSString *current = [NSString stringWithFormat:@"%@",
-                             [NSString stringWithUTF8String:s]];
-        NSLog(@"%s", s);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.logLines addObject:current];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
+        .set_options("mlabns/base_url", "http://mlab-ns.appspot.com/")
+        .set_options("test_suite", MK_NDT_DOWNLOAD)
+        .set_verbosity(MK_LOG_INFO)
+        .on_log([self](uint32_t, const char *s) {
+            NSString *current = [NSString stringWithFormat:@"%@",
+                                 [NSString stringWithUTF8String:s]];
+            //NSLog(@"%s", s);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.logLines addObject:current];
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"refreshLog" object:nil];
+            });
+        })
+        .set_options("dns/nameserver", "8.8.8.8")
+        .run([self]() {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.finished = TRUE;
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"testComplete" object:nil];
+            });
         });
-    })
-    .set_options("dns/nameserver", "8.8.8.8")
-    .run([self]() {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.finished = TRUE;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshLog" object:nil];
-        });
-    });
 }
 
 @end

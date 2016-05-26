@@ -1,17 +1,12 @@
-//
-//  AppDelegate.h
-//  measurement-kit-test
-//
-//  Created by Lorenzo Primiterra on 11/05/16.
-//  Copyright © 2016 Measurement kit. All rights reserved.
-//
+// Part of MeasurementKit <https://measurement-kit.github.io/>.
+// MeasurementKit is free software. See AUTHORS and LICENSE for more
+// information on the copying conditions.
 
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 

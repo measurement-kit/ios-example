@@ -16,7 +16,6 @@
 		EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */; };
 		EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */; };
 		EDBC90E31CE34B6E00CC20CF /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */; };
-		EDBC90E61CE34BCB00CC20CF /* hosts.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90E51CE34BCB00CC20CF /* hosts.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMeasurement.h; sourceTree = "<group>"; };
 		EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkMeasurement.mm; sourceTree = "<group>"; };
 		EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
-		EDBC90E51CE34BCB00CC20CF /* hosts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hosts.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +89,6 @@
 		EDBC90C71CE341B700CC20CF /* measurement-kit-test */ = {
 			isa = PBXGroup;
 			children = (
-				EDBC90E41CE34BCB00CC20CF /* fixtures */,
 				EDBC90CB1CE341B800CC20CF /* AppDelegate.h */,
 				EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */,
 				EDBC90CE1CE341B800CC20CF /* ViewController.h */,
@@ -113,14 +110,6 @@
 				EDBC90C91CE341B700CC20CF /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EDBC90E41CE34BCB00CC20CF /* fixtures */ = {
-			isa = PBXGroup;
-			children = (
-				EDBC90E51CE34BCB00CC20CF /* hosts.txt */,
-			);
-			path = fixtures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,7 +172,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDBC90E61CE34BCB00CC20CF /* hosts.txt in Resources */,
 				EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */,
 				EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */,
 				EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */,
