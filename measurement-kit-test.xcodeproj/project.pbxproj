@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06306AC71D1AEE8D00A66C5D /* GeoIP.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC41D1AEE8D00A66C5D /* GeoIP.dat */; };
+		06306AC81D1AEE8D00A66C5D /* GeoIPASNum.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */; };
+		06306AC91D1AEE8D00A66C5D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC61D1AEE8D00A66C5D /* cacert.pem */; };
 		BF5693B931326FF43B26C47F /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */; };
 		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
 		EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06306AC41D1AEE8D00A66C5D /* GeoIP.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIP.dat; path = Resources/GeoIP.dat; sourceTree = "<group>"; };
+		06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIPASNum.dat; path = Resources/GeoIPASNum.dat; sourceTree = "<group>"; };
+		06306AC61D1AEE8D00A66C5D /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cacert.pem; path = Resources/cacert.pem; sourceTree = "<group>"; };
 		3EB9B7C12A898813E4A20166 /* libPods-measurement-kit-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-measurement-kit-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.release.xcconfig"; sourceTree = "<group>"; };
 		E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +56,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06B188D91D1A9C790068699D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				06306AC41D1AEE8D00A66C5D /* GeoIP.dat */,
+				06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */,
+				06306AC61D1AEE8D00A66C5D /* cacert.pem */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		4DB6BAADDC044FDA77D9750F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +105,7 @@
 		EDBC90C71CE341B700CC20CF /* measurement-kit-test */ = {
 			isa = PBXGroup;
 			children = (
+				06B188D91D1A9C790068699D /* Resources */,
 				EDBC90CB1CE341B800CC20CF /* AppDelegate.h */,
 				EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */,
 				EDBC90CE1CE341B800CC20CF /* ViewController.h */,
@@ -146,6 +163,7 @@
 				TargetAttributes = {
 					EDBC90C41CE341B400CC20CF = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 5YRT8MW288;
 					};
 				};
 			};
@@ -172,7 +190,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06306AC91D1AEE8D00A66C5D /* cacert.pem in Resources */,
+				06306AC71D1AEE8D00A66C5D /* GeoIP.dat in Resources */,
 				EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */,
+				06306AC81D1AEE8D00A66C5D /* GeoIPASNum.dat in Resources */,
 				EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */,
 				EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */,
 			);
@@ -353,12 +374,15 @@
 			baseConfigurationReference = E77B610DCB977C8D5EFF1F8C /* Pods-measurement-kit-test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openobservatory.mk.ios.BaseApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -368,13 +392,15 @@
 			baseConfigurationReference = 8D0BECA04EEE37987D9D92A2 /* Pods-measurement-kit-test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Simone Basso (5YRT8MW288)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openobservatory.mk.ios.BaseApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
