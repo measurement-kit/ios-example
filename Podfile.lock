@@ -1,0 +1,22 @@
+PODS:
+  - measurement_kit (0.2.0-beta.1)
+
+DEPENDENCIES:
+  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `integration/ndt-ooni-callback-error`)
+
+EXTERNAL SOURCES:
+  measurement_kit:
+    :branch: integration/ndt-ooni-callback-error
+    :git: https://github.com/measurement-kit/measurement-kit.git
+
+CHECKOUT OPTIONS:
+  measurement_kit:
+    :commit: 379f13d21175ebe503504bd5a5aa621a369f4528
+    :git: https://github.com/measurement-kit/measurement-kit.git
+
+SPEC CHECKSUMS:
+  measurement_kit: f611c08777eec61c77596fb1eb7bbda22cb189e0
+
+PODFILE CHECKSUM: db5bf5f0a4e2035038eb19d45c4aeb4d07ff33b0
+
+COCOAPODS: 1.0.0
