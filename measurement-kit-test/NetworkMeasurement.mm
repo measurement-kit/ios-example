@@ -46,16 +46,24 @@
     mk::ndt::NdtTest()
         .set_options("test_suite", MK_NDT_DOWNLOAD)
         .set_verbosity(MK_LOG_INFO)
-        .set_output_file_path([ofile UTF8String])
-        .on_log([self](uint32_t, const char *s) {
+        .set_output_filepath([ofile UTF8String])
+        .on_log([self](uint32_t type, const char *s) {
             NSString *current = [NSString stringWithFormat:@"%@",
                                  [NSString stringWithUTF8String:s]];
-            //NSLog(@"%s", s);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
+            if ((type & MK_LOG_JSON)){
+                NSData* data = [current dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//                NSLog(@"%@", values);
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshLog" object:nil];
-            });
+                 postNotificationName:@"refreshHeader" object:nil userInfo:values];
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.logLines addObject:current];
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"refreshLog" object:nil];
+                });
+            }
         })
         .set_options("net/ca_bundle_path", [ca_cert UTF8String])
         .set_options("dns/nameserver", "8.8.8.8")

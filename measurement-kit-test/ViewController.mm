@@ -18,11 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"TEST";
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(refreshLog) name:@"refreshLog"
      object:nil];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(testComplete) name:@"testComplete"
+     object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(refreshHeader:) name:@"refreshHeader"
      object:nil];
 }
 
@@ -41,6 +45,16 @@
 -(void)refreshLog{
     [self.logView setText:[[self.selectedMeasurement logLines]
                            componentsJoinedByString:@"\n"]];
+}
+
+- (void)refreshHeader:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    if ([userInfo objectForKey:@"speed"]){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.title = [NSString stringWithFormat:@"Speed %@ %@", [[userInfo objectForKey:@"speed"] objectAtIndex:0], [[userInfo objectForKey:@"speed"] objectAtIndex:1]];
+        });
+    }
 }
 
 -(void)testComplete{
