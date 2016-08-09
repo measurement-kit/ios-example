@@ -2,21 +2,21 @@ PODS:
   - measurement_kit (0.3.0-dev)
 
 DEPENDENCIES:
-  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `feature/ndt-summary`)
+  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `release/v0.3.0`)
 
 EXTERNAL SOURCES:
   measurement_kit:
-    :branch: feature/ndt-summary
+    :branch: release/v0.3.0
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: 212724cb663b3886748b0e20a48b1b1dbb763560
+    :commit: 6ab6856286fa8ca13313f25aa1ad05de5ff35d88
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 SPEC CHECKSUMS:
   measurement_kit: 4cb2f9bd1e5d56c92ba157359886174bbc700155
 
-PODFILE CHECKSUM: 5a7b553b0d8fda2c1efaeb1054b055562d018986
+PODFILE CHECKSUM: 300677045f43dbe29ceead2fd149579fc2865e78
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1

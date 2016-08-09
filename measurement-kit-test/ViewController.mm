@@ -52,7 +52,7 @@
     NSDictionary *userInfo = notification.userInfo;
     if ([userInfo objectForKey:@"speed"]){
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.title = [NSString stringWithFormat:@"Speed %@ %@", [[userInfo objectForKey:@"speed"] objectAtIndex:0], [[userInfo objectForKey:@"speed"] objectAtIndex:1]];
+            self.title = [NSString stringWithFormat:@"Speed %8.0f %@", [[[userInfo objectForKey:@"speed"] objectAtIndex:0] doubleValue], [[userInfo objectForKey:@"speed"] objectAtIndex:1]];
         });
     }
 }
