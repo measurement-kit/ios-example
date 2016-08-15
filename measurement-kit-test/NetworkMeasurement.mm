@@ -49,6 +49,16 @@
 
     // TODO: we should probably use the device's nameserver, not 8.8.8.8
 
+    const char *servers[2] = {
+        "neubot.mlab.mlab1.nuq0t.measurement-lab.org",
+        "52.43.197.62",
+    };
+    static int previous_index = 0;
+    const char *server_address = servers[previous_index++];
+    if (previous_index > 1) {
+        previous_index = 0;
+    }
+
     mk::ndt::NdtTest()
         .set_options("test_suite", MK_NDT_DOWNLOAD | MK_NDT_DOWNLOAD_EXT)
         .set_verbosity(MK_LOG_INFO)
@@ -91,7 +101,7 @@
         .set_options("geoip_country_path", [geoip_country UTF8String])
         .set_options("geoip_asn_path", [geoip_asn UTF8String])
         // TODO: set here the specific testing server
-        //.set_options("address", "neubot.mlab.mlab1.iad0t.measurement-lab.org")
+        .set_options("address", server_address)
         .on_entry([self](std::string s) {
             NSString *current = [NSString stringWithFormat:@"%@",
                                  [NSString stringWithUTF8String:s.c_str()]];
