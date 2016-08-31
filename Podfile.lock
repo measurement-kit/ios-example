@@ -1,22 +1,22 @@
 PODS:
-  - measurement_kit (0.3.0-alpha.1)
+  - measurement_kit (0.4.0-dev)
 
 DEPENDENCIES:
-  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `release/v0.3.0`)
+  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `release/v0.4.0-alpha`)
 
 EXTERNAL SOURCES:
   measurement_kit:
-    :branch: release/v0.3.0
+    :branch: release/v0.4.0-alpha
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: f5189d4710a52e014e3ed49f4a067186ffb4053a
+    :commit: d8ad0b0b1f79c47017f22f3355c7596bc93018f4
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 SPEC CHECKSUMS:
-  measurement_kit: 1f89f814480479534891c02509ff4a40e169e610
+  measurement_kit: a3766e61bbdaa71197bbeb85008d4451ddc30765
 
-PODFILE CHECKSUM: 300677045f43dbe29ceead2fd149579fc2865e78
+PODFILE CHECKSUM: cf93ff38c14306f5348ec43ce642141d24ad3d0e
 
 COCOAPODS: 1.0.1
