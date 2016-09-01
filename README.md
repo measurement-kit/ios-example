@@ -42,16 +42,11 @@ open measurement-kit-test.xcworkspace
 
 ## Updating to a new version of MK
 
-This app is based on the frequently updated `feature/ndt` branch of
-Measurement Kit. Thus, it would make sense, from time to time, to
-rebuild the app using a more up to date version of such branch. To
-this end, you can try this procedure
+To update to a new version of MeasurementKit, run:
 
 1. close Xcode
 
-2. get rid of `Podfile`, `Podfile.lock`, and `Pods`
-
-3. follow the build procedure described above
+2. run `pod update --verbose`
 
 ## Known bugs
 
