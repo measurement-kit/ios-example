@@ -3,6 +3,8 @@
 // information on the copying conditions.
 
 #import "NetworkMeasurement.h"
+
+#import "measurement_kit/ext.hpp"
 #import "measurement_kit/ndt.hpp"
 
 @implementation NetworkMeasurement
@@ -47,8 +49,6 @@
        multiple streams using the same server; this is why the server address
        has been explicitly provided below */
 
-    // TODO: we should probably use the device's nameserver, not 8.8.8.8
-
     const char *servers[2] = {
         "neubot.mlab.mlab1.nuq0t.measurement-lab.org",
         "52.43.197.62",
@@ -63,56 +63,175 @@
         .set_options("test_suite", MK_NDT_DOWNLOAD | MK_NDT_DOWNLOAD_EXT)
         .set_verbosity(MK_LOG_INFO)
         .set_output_filepath([ofile UTF8String])
-        .on_log([self](uint32_t type, const char *s) {
-            NSString *current = [NSString stringWithFormat:@"%@",
-                                 [NSString stringWithUTF8String:s]];
-            if ((type & MK_LOG_JSON) != 0) {
-                NSData *data = [current dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary *values = [NSJSONSerialization
-                                        JSONObjectWithData:data
-                                        options:NSJSONReadingMutableContainers
-                                        error:nil];
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshHeader"
-                 object:nil userInfo:values];
 
-                NSString *type = [values objectForKey:@"type"];
-                if ([type isEqualToString:@"download-speed"]) {
-                    NSArray *speed_array = [values objectForKey:@"speed"];
-                    NSNumber *speed_num = [speed_array objectAtIndex:0];
-                    NSString *speed_unit = [speed_array objectAtIndex:1];
-                    NSNumber *num_streams = [values objectForKey:@"num_streams"];
-                    current = [NSString stringWithFormat:@"%@ [%@ conn]: %8.0f %@ ",
-                               type, num_streams, [speed_num doubleValue],
-                               speed_unit];
-                } else {
-                    // TODO: make final summary easier to read?
+        // The https collector is currently broken and by default we use
+        // another https collector that discards input. Set this one instead
+        // such that I can see the results of tests run by you guys.
+        .set_options("collector_base_url", "http://a.collector.test.ooni.io")
+
+        .on_log([self](uint32_t type, const char *s) {
+            // Intercept log messages from MK and, in particular, process
+            // those log messages formatted as JSON to print speed
+            std::string sp = s;
+            if ((type & MK_LOG_JSON) != 0) {
+                try {
+                    nlohmann::json root = nlohmann::json::parse(s);
+                    if (root.at("type") == "download-speed") {
+                        /*-
+                         * For example:
+                         *
+                         * {
+                         *   "type": "download-speed",
+                         *   "elapsed": [8.863781, "s"],
+                         *   "num_streams": 1,
+                         *   "speed": [840.516366, "kbit/s"]
+                         * }
+                         */
+                        double speed_num = root["speed"][0];
+                        std::string speed_unit = root["speed"][1];
+                        int num_streams = root["num_streams"];
+                        std::string tmp = root["type"];
+                        tmp += " [";
+                        tmp += std::to_string(num_streams);
+                        tmp += " conns]: ";
+                        tmp += std::to_string(speed_num);
+                        tmp += " ";
+                        tmp += speed_unit;
+                        sp = tmp;
+                    } else if (root.find("progress") != root.end()) {
+                        /*-
+                         * For example:
+                         *
+                         * {
+                         *    "progress": 0.33
+                         * }
+                         */
+                        // Anyway not used by NDT currently
+                    } else {
+                        // Should not happen
+                    }
+                } catch (...) {
+                    /* FALLTHROUGH */
                 }
-                /* FALLTHROUGH */
             }
+            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.logLines addObject:current];
                 [[NSNotificationCenter defaultCenter]
                     postNotificationName:@"refreshLog" object:nil];
             });
         })
-        .set_options("net/ca_bundle_path", [ca_cert UTF8String])
+
+        // Note: of course this works if we use Google's DNS but perhaps
+        // it would be better to use instead the DNS of the device
         .set_options("dns/nameserver", "8.8.8.8")
+
+
+        .set_options("net/ca_bundle_path", [ca_cert UTF8String])
         .set_options("geoip_country_path", [geoip_country UTF8String])
         .set_options("geoip_asn_path", [geoip_asn UTF8String])
-        // TODO: set here the specific testing server
+
+        // In general NDT selects the server to use via the mlabns service
+        // but in our specific case we need to select specific servers
         .set_options("address", server_address)
-        .on_entry([self](std::string s) {
+
+        .on_entry([self](std::string sp) {
+            /*
+             * Here we tap into the result of the test, a valid JSON that you
+             * probably would also like to submit to your collector.
+             *
+             * The specific way in which the JSON is parsed depends on what
+             * we want to extract from it. Here we're trying to do something
+             * compatible with speedtest.net's data filtering.
+             *
+             * Minimal example:
+             *
+             * {
+             *   "ext": {},
+             *   "test_keys": {
+             *     "test_s2c": [
+             *       "connect_times": [ 0.1, 0.2, 0.1 ],
+             *       "params": {
+             *         "num_streams": 3
+             *       },
+             *       "receiver_data": [
+             *         [123456789.012345, 117843.11]
+             *       ]
+             *     ],
+             *   },
+             *   "test_version": "0.0.4"
+             * },
+             *
+             * Note that in receiver_data the first number is the elapsed
+             * timestamp and the second is the speed in kbit/s. Connect times
+             * are in seconds. There are more keys than this in the result.
+             *
+             * The code below creates a key named "plume" inside of "ext" and
+             * fills it with summary experiments data.
+             */
+            try {
+                nlohmann::json root = nlohmann::json::parse(sp);
+                if (root["test_version"] == "0.0.4") {
+                    for (auto &test_s2c: root["test_keys"]["test_s2c"]) {
+                        // 1. find out test with three connections
+                        int num_streams = test_s2c["params"]["num_streams"];
+                        if (num_streams != 3) {
+                            continue;
+                        }
+                        auto ext = nlohmann::json::object();
+                        // 2. compute the ping
+                        std::vector<double> rtts = test_s2c["connect_times"];
+                        double sum = 0.0;
+                        for (auto &x: rtts) { sum += x; }
+                        double ping = 0.0;
+                        if (rtts.size() > 0) {
+                            ping = sum / rtts.size();
+                        }
+                        ext["plume"]["ping"] = ping;
+                        // 3. compute the download (v1, can be improved!)
+                        std::vector<double> speeds;
+                        for (auto &x: test_s2c["receiver_data"]) {
+                            speeds.push_back(x[1]);
+                        }
+                        std::sort(speeds.begin(), speeds.end());
+                        std::vector<double> good_speeds(
+                            // Note: going beyond vector limits would raise
+                            // a std::length_error exception
+                            speeds.begin() + 6, speeds.end() - 2
+                        );
+                        sum = 0.0;
+                        for (auto &x: good_speeds) { sum += x; };
+                        double download;
+                        if (good_speeds.size() > 0) {
+                            download = sum / good_speeds.size();
+                        }
+                        ext["plume"]["download"] = download;
+                        // 3. upload (FIXME: still to be done)
+                        // 4. extra info including vendor and versioning
+                        ext["plume"]["num_streams"] = num_streams;
+                        ext["plume"]["version"] = "0.0.1";
+                        root["test_keys"]["ext"] = ext;
+                        // 4. finally rewrite `sp`
+                        sp = root.dump(4);
+                    }
+                } else {
+                    // Conservative: we may not know how to handle this
+                    // version of the NDT test (some fields may vary)
+                }
+            } catch (...) {
+                // FALLTHROUGH
+            }
             NSString *current = [NSString stringWithFormat:@"%@",
-                                 [NSString stringWithUTF8String:s.c_str()]];
-            // TODO: we should probably use the entry to populate
-            // a result pane or something fancy...
+                                 [NSString stringWithUTF8String:sp.c_str()]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.logLines addObject:current];
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"refreshLog" object:nil];
             });
         })
+
+        // This basically runs the test in a background MK thread and
+        // calls the callback passed as argument when complete
         .run([self]() {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.finished = TRUE;
