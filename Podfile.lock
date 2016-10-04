@@ -2,21 +2,21 @@ PODS:
   - measurement_kit (0.4.0-dev)
 
 DEPENDENCIES:
-  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `release/v0.4.0-alpha`)
+  - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `feature/ndt-multi-stream`)
 
 EXTERNAL SOURCES:
   measurement_kit:
-    :branch: release/v0.4.0-alpha
+    :branch: feature/ndt-multi-stream
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: 81cc1d9fca1eb4a24eee1e116275145558f15fff
+    :commit: a99c5a2c87053f96679a43c3b532eb9f5c439c79
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 SPEC CHECKSUMS:
   measurement_kit: a3766e61bbdaa71197bbeb85008d4451ddc30765
 
-PODFILE CHECKSUM: cf93ff38c14306f5348ec43ce642141d24ad3d0e
+PODFILE CHECKSUM: 757c7f2529c138199e6fdab57e56265948b0b16a
 
 COCOAPODS: 1.0.1
