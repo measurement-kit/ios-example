@@ -7,7 +7,8 @@
 
 @interface ViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextView *logView;
+
+@property (weak, nonatomic) IBOutlet UITextView *logView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *runButton;
 @property (strong, nonatomic) NetworkMeasurement *selectedMeasurement;
 
