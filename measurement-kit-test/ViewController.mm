@@ -12,7 +12,6 @@
 
 - (id)init {
     self = [super init];
-    self.logView.editable = false;
     return self;
 }
 
@@ -37,13 +36,13 @@
 
 - (IBAction)runTest:(id)sender{
     [self.runButton setEnabled:NO];
-    [self.logView setText:@""];
+    [self.testLogs setText:@""];
     self.selectedMeasurement = [[NdtTest alloc] init];
     [self.selectedMeasurement run];
 }
 
 -(void)refreshLog{
-    [self.logView setText:[[self.selectedMeasurement logLines]
+    [self.testLogs setText:[[self.selectedMeasurement logLines]
                            componentsJoinedByString:@"\n"]];
 }
 
@@ -59,7 +58,7 @@
 
 -(void)testComplete{
     [self.runButton setEnabled:YES];
-    [self.logView setText:[[self.selectedMeasurement logLines]
+    [self.testLogs setText:[[self.selectedMeasurement logLines]
                            componentsJoinedByString:@"\n"]];
 }
 

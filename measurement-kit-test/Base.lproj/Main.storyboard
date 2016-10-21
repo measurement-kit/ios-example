@@ -121,8 +121,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="logView" destination="iEU-kg-Dmq" id="Oiq-uW-yG2"/>
+                        <outlet property="finalLogs" destination="4fv-Jr-TF4" id="ouF-eS-es5"/>
+                        <outlet property="progressLogs" destination="vCg-kd-Z0o" id="9Eb-OY-nud"/>
                         <outlet property="runButton" destination="xvE-gd-kGj" id="jcL-Mv-L0F"/>
+                        <outlet property="testLogs" destination="iEU-kg-Dmq" id="NMN-63-yE9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
