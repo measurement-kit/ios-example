@@ -67,7 +67,7 @@
         // The https collector is currently broken and by default we use
         // another https collector that discards input. Set this one instead
         // such that I can see the results of tests run by you guys.
-        .set_options("collector_base_url", "http://a.collector.test.ooni.io")
+        //.set_options("collector_base_url", "http://a.collector.test.ooni.io")
 
         .on_log([self](uint32_t type, const char *s) {
             // Intercept log messages from MK and, in particular, process
