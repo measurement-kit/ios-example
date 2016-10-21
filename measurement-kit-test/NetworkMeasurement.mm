@@ -112,12 +112,20 @@
                 } catch (...) {
                     /* FALLTHROUGH */
                 }
+                // Here you should update the progress log
+                NSString *current = [NSString stringWithUTF8String:s];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"refreshProgressLogs" object:current];
+                });
+            } else {
+                // Here you should update the test log
+                NSString *current = [NSString stringWithUTF8String:sp.c_str()];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"refreshTestLogs" object:current];
+                });
             }
-            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                    postNotificationName:@"refreshTestLogs" object:current];
-            });
         })
 
         // Note: of course this works if we use Google's DNS but perhaps
@@ -219,11 +227,10 @@
             } catch (...) {
                 // FALLTHROUGH
             }
-            NSString *current = [NSString stringWithFormat:@"%@",
-                                 [NSString stringWithUTF8String:sp.c_str()]];
+            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshTestLogs" object:current];
+                 postNotificationName:@"refreshFinalLogs" object:current];
             });
         })
 
