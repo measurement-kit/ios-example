@@ -11,7 +11,6 @@
 
 -(id) init {
     self = [super init];
-    self.logLines = [[NSMutableArray alloc] init];
     self.finished = false;
     return self;
 }
@@ -116,9 +115,8 @@
             }
             NSString *current = [NSString stringWithUTF8String:sp.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
                 [[NSNotificationCenter defaultCenter]
-                    postNotificationName:@"refreshLog" object:nil];
+                    postNotificationName:@"refreshTestLogs" object:current];
             });
         })
 
@@ -224,9 +222,8 @@
             NSString *current = [NSString stringWithFormat:@"%@",
                                  [NSString stringWithUTF8String:sp.c_str()]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshLog" object:nil];
+                 postNotificationName:@"refreshTestLogs" object:current];
             });
         })
 

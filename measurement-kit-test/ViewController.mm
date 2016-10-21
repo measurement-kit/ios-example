@@ -19,7 +19,7 @@
     [super viewDidLoad];
     self.title = @"TEST";
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshLog) name:@"refreshLog"
+     addObserver:self selector:@selector(refreshTestLogs:) name:@"refreshTestLogs"
      object:nil];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(testComplete) name:@"testComplete"
@@ -38,15 +38,15 @@
     [self.selectedMeasurement run];
 }
 
--(void)refreshLog{
-    [self.testLogs setText:[[self.selectedMeasurement logLines]
-                           componentsJoinedByString:@"\n"]];
+-(void)refreshTestLogs:(NSNotification *)notification{
+    NSString *log = [notification object];
+    log = [log stringByAppendingString:@"\n"];
+    self.testLogs.text = [[self.testLogs text] stringByAppendingString:log];
 }
+
 
 -(void)testComplete{
     [self.runButton setEnabled:YES];
-    [self.testLogs setText:[[self.selectedMeasurement logLines]
-                           componentsJoinedByString:@"\n"]];
 }
 
 @end
