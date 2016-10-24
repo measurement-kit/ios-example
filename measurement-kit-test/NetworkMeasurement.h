@@ -10,7 +10,6 @@
 @property NSNumber *test_id;
 @property NSString *status;
 @property BOOL finished;
-@property NSMutableArray *logLines;
 
 -(void) run;
 

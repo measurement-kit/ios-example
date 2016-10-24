@@ -11,7 +11,6 @@
 
 -(id) init {
     self = [super init];
-    self.logLines = [[NSMutableArray alloc] init];
     self.finished = false;
     return self;
 }
@@ -67,7 +66,7 @@
         // The https collector is currently broken and by default we use
         // another https collector that discards input. Set this one instead
         // such that I can see the results of tests run by you guys.
-        .set_options("collector_base_url", "http://a.collector.test.ooni.io")
+        //.set_options("collector_base_url", "http://a.collector.test.ooni.io")
 
         .on_log([self](uint32_t type, const char *s) {
             // Intercept log messages from MK and, in particular, process
@@ -113,13 +112,20 @@
                 } catch (...) {
                     /* FALLTHROUGH */
                 }
+                // Here you should update the progress log
+                NSString *current = [NSString stringWithUTF8String:s];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"refreshProgressLogs" object:current];
+                });
+            } else {
+                // Here you should update the test log
+                NSString *current = [NSString stringWithUTF8String:sp.c_str()];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"refreshTestLogs" object:current];
+                });
             }
-            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
-                [[NSNotificationCenter defaultCenter]
-                    postNotificationName:@"refreshLog" object:nil];
-            });
         })
 
         // Note: of course this works if we use Google's DNS but perhaps
@@ -221,12 +227,10 @@
             } catch (...) {
                 // FALLTHROUGH
             }
-            NSString *current = [NSString stringWithFormat:@"%@",
-                                 [NSString stringWithUTF8String:sp.c_str()]];
+            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.logLines addObject:current];
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshLog" object:nil];
+                 postNotificationName:@"refreshFinalLogs" object:current];
             });
         })
 

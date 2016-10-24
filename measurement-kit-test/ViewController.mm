@@ -12,7 +12,6 @@
 
 - (id)init {
     self = [super init];
-    self.logView.editable = false;
     return self;
 }
 
@@ -20,13 +19,16 @@
     [super viewDidLoad];
     self.title = @"TEST";
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshLog) name:@"refreshLog"
+     addObserver:self selector:@selector(refreshTestLogs:) name:@"refreshTestLogs"
+     object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(refreshProgressLogs:) name:@"refreshProgressLogs"
+     object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(refreshFinalLogs:) name:@"refreshFinalLogs"
      object:nil];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(testComplete) name:@"testComplete"
-     object:nil];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshHeader:) name:@"refreshHeader"
      object:nil];
 }
 
@@ -37,30 +39,35 @@
 
 - (IBAction)runTest:(id)sender{
     [self.runButton setEnabled:NO];
-    [self.logView setText:@""];
+    [self.testLogs setText:@""];
+    [self.progressLogs setText:@""];
+    [self.finalLogs setText:@""];
     self.selectedMeasurement = [[NdtTest alloc] init];
     [self.selectedMeasurement run];
 }
 
--(void)refreshLog{
-    [self.logView setText:[[self.selectedMeasurement logLines]
-                           componentsJoinedByString:@"\n"]];
+-(void)refreshTestLogs:(NSNotification *)notification{
+    NSString *log = [notification object];
+    log = [log stringByAppendingString:@"\n"];
+    self.testLogs.text = [[self.testLogs text] stringByAppendingString:log];
+    [self.testLogs scrollRangeToVisible:NSMakeRange([self.testLogs.text length], 0)];
 }
 
-- (void)refreshHeader:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    if ([userInfo objectForKey:@"speed"]){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.title = [NSString stringWithFormat:@"Speed %8.0f %@", [[[userInfo objectForKey:@"speed"] objectAtIndex:0] doubleValue], [[userInfo objectForKey:@"speed"] objectAtIndex:1]];
-        });
-    }
+-(void)refreshProgressLogs:(NSNotification *)notification{
+    NSString *log = [notification object];
+    [self.progressLogs setText:log];
+    [self.progressLogs scrollRangeToVisible:NSMakeRange([self.progressLogs.text length], 0)];
 }
+
+-(void)refreshFinalLogs:(NSNotification *)notification{
+    NSString *log = [notification object];
+    [self.finalLogs setText:log];
+    [self.finalLogs scrollRangeToVisible:NSMakeRange([self.finalLogs.text length], 0)];
+}
+
 
 -(void)testComplete{
     [self.runButton setEnabled:YES];
-    [self.logView setText:[[self.selectedMeasurement logLines]
-                           componentsJoinedByString:@"\n"]];
 }
 
 @end
