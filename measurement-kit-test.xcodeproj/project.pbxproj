@@ -12,7 +12,7 @@
 		06306AC91D1AEE8D00A66C5D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC61D1AEE8D00A66C5D /* cacert.pem */; };
 		9E636EA922E2C880A4EF3173 /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */; };
 		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
-		EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */; };
+		EDBC90CD1CE341B800CC20CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.m */; };
 		EDBC90D01CE341B800CC20CF /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CF1CE341B800CC20CF /* ViewController.mm */; };
 		EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D11CE341B800CC20CF /* Main.storyboard */; };
 		EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D41CE341B800CC20CF /* Assets.xcassets */; };
@@ -31,7 +31,7 @@
 		EDBC90C51CE341B400CC20CF /* measurement-kit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "measurement-kit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBC90C91CE341B700CC20CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDBC90CB1CE341B800CC20CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		EDBC90CC1CE341B800CC20CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
 		EDBC90CE1CE341B800CC20CF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EDBC90CF1CE341B800CC20CF /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		EDBC90D21CE341B800CC20CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			children = (
 				06B188D91D1A9C790068699D /* Resources */,
 				EDBC90CB1CE341B800CC20CF /* AppDelegate.h */,
-				EDBC90CC1CE341B800CC20CF /* AppDelegate.mm */,
+				EDBC90CC1CE341B800CC20CF /* AppDelegate.m */,
 				EDBC90CE1CE341B800CC20CF /* ViewController.h */,
 				EDBC90CF1CE341B800CC20CF /* ViewController.mm */,
 				EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */,
@@ -158,7 +158,7 @@
 		EDBC90BD1CE341B400CC20CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Measurement kit";
 				TargetAttributes = {
 					EDBC90C41CE341B400CC20CF = {
@@ -256,7 +256,7 @@
 			files = (
 				EDBC90D01CE341B800CC20CF /* ViewController.mm in Sources */,
 				EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */,
-				EDBC90CD1CE341B800CC20CF /* AppDelegate.mm in Sources */,
+				EDBC90CD1CE341B800CC20CF /* AppDelegate.m in Sources */,
 				EDBC90CA1CE341B700CC20CF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,8 +297,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Simone Basso (5YRT8MW288)";
@@ -343,8 +345,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Simone Basso (5YRT8MW288)";

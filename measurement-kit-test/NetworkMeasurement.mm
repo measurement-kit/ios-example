@@ -5,7 +5,7 @@
 #import "NetworkMeasurement.h"
 
 #import "measurement_kit/ext.hpp"
-#import "measurement_kit/ndt.hpp"
+#import "measurement_kit/nettests.hpp"
 
 @implementation NetworkMeasurement
 
@@ -33,210 +33,80 @@
     NSString *geoip_country = [bundle pathForResource:@"GeoIP" ofType:@"dat"];
     NSString *ca_cert = [bundle pathForResource:@"cacert" ofType:@"pem"];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *docs_dir = [paths objectAtIndex:0];
-    NSString *ofile = [NSString stringWithFormat:@"%@/output.json", docs_dir];
-
     // Note: the emulator does not cope well with receiving
     // a signal of type SIGPIPE when the debugger is attached
     // See http://stackoverflow.com/questions/1294436
 
-    // XXX: MK_LOG_DEBUG2 sends app to deadlock?!
+    mk::nettests::MultiNdtTest()
 
-    /* Note: this experiment is about comparing the performance of one and
-       multiple streams using the same server; this is why the server address
-       has been explicitly provided below */
-
-    const char *servers[2] = {
-        "neubot.mlab.mlab1.nuq0t.measurement-lab.org",
-        "52.43.197.62",
-    };
-    static int previous_index = 0;
-    const char *server_address = servers[previous_index++];
-    if (previous_index > 1) {
-        previous_index = 0;
-    }
-
-    mk::ndt::NdtTest()
-        .set_options("test_suite", MK_NDT_DOWNLOAD | MK_NDT_DOWNLOAD_EXT)
+        // Set verbosity level such that we see what's happening but many
+        // debugging related info isn't shown to the user
         .set_verbosity(MK_LOG_INFO)
-        .set_output_filepath([ofile UTF8String])
 
-        // The https collector is currently broken and by default we use
-        // another https collector that discards input. Set this one instead
-        // such that I can see the results of tests run by you guys.
-        //.set_options("collector_base_url", "http://a.collector.test.ooni.io")
+        // Make sure we are not going to write any file on the disk
+        .set_options("no_file_report", "1")
 
-        .on_log([self](uint32_t type, const char *s) {
-            // Intercept log messages from MK and, in particular, process
-            // those log messages formatted as JSON to print speed
-            std::string sp = s;
-            if ((type & MK_LOG_JSON) != 0) {
-                try {
-                    nlohmann::json root = nlohmann::json::parse(s);
-                    if (root.at("type") == "download-speed") {
-                        /*-
-                         * For example:
-                         *
-                         * {
-                         *   "type": "download-speed",
-                         *   "elapsed": [8.863781, "s"],
-                         *   "num_streams": 1,
-                         *   "speed": [840.516366, "kbit/s"]
-                         * }
-                         */
-                        double speed_num = root["speed"][0];
-                        std::string speed_unit = root["speed"][1];
-                        int num_streams = root["num_streams"];
-                        std::string tmp = root["type"];
-                        tmp += " [";
-                        tmp += std::to_string(num_streams);
-                        tmp += " conns]: ";
-                        tmp += std::to_string(speed_num);
-                        tmp += " ";
-                        tmp += speed_unit;
-                        sp = tmp;
-                    } else if (root.find("progress") != root.end()) {
-                        /*-
-                         * For example:
-                         *
-                         * {
-                         *    "progress": 0.33
-                         * }
-                         */
-                        // Anyway not used by NDT currently
-                    } else {
-                        // Should not happen
-                    }
-                } catch (...) {
-                    /* FALLTHROUGH */
-                }
-                // Here you should update the progress log
-                NSString *current = [NSString stringWithUTF8String:s];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"refreshProgressLogs" object:current];
-                });
-            } else {
-                // Here you should update the test log
-                NSString *current = [NSString stringWithUTF8String:sp.c_str()];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"refreshTestLogs" object:current];
-                });
-            }
+        // Properly route information regarding percentage of completion
+        .on_progress([](double prog, const char *s) {
+            NSString *os = [NSString stringWithFormat:@"Progress: %.1f%%: %s",
+                            prog * 100.0, s];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"refreshTestLogs" object:os];
+            });
         })
 
-        // Note: of course this works if we use Google's DNS but perhaps
-        // it would be better to use instead the DNS of the device
-        .set_options("dns/nameserver", "8.8.8.8")
+        // Properly route structured events occurring during the test
+        .on_event([self](const char *s) {
+            nlohmann::json doc = nlohmann::json::parse(s);
+            if (doc["type"] != "download-speed") {
+                return;
+            }
+            double elapsed = doc["elapsed"][0];
+            std::string elapsed_unit = doc["elapsed"][1];
+            double speed = doc["speed"][0];
+            std::string speed_unit = doc["speed"][1];
+            NSString *os = [NSString stringWithFormat:@"%8.2f %s %10.2f %s\n",
+                             elapsed, elapsed_unit.c_str(), speed,
+                             speed_unit.c_str()];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"refreshProgressLogs" object:os];
+            });
+        })
 
+        // Properly route generic log messages emitted during the test
+        .on_log([self](uint32_t /*type*/, const char *s) {
+            NSString *os = [NSString stringWithUTF8String:s];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"refreshTestLogs" object:os];
+            });
+        })
 
+        // Certificate Authority file to communicate with collector using https
         .set_options("net/ca_bundle_path", [ca_cert UTF8String])
+
+        // GeoIP files used to infer country and ISP ASnum
         .set_options("geoip_country_path", [geoip_country UTF8String])
         .set_options("geoip_asn_path", [geoip_asn UTF8String])
 
-        // In general NDT selects the server to use via the mlabns service
-        // but in our specific case we need to select specific servers
-        .set_options("address", server_address)
-
-        .on_entry([self](std::string sp) {
-            /*
-             * Here we tap into the result of the test, a valid JSON that you
-             * probably would also like to submit to your collector.
-             *
-             * The specific way in which the JSON is parsed depends on what
-             * we want to extract from it. Here we're trying to do something
-             * compatible with speedtest.net's data filtering.
-             *
-             * Minimal example:
-             *
-             * {
-             *   "ext": {},
-             *   "test_keys": {
-             *     "test_s2c": [
-             *       "connect_times": [ 0.1, 0.2, 0.1 ],
-             *       "params": {
-             *         "num_streams": 3
-             *       },
-             *       "receiver_data": [
-             *         [123456789.012345, 117843.11]
-             *       ]
-             *     ],
-             *   },
-             *   "test_version": "0.0.4"
-             * },
-             *
-             * Note that in receiver_data the first number is the elapsed
-             * timestamp and the second is the speed in kbit/s. Connect times
-             * are in seconds. There are more keys than this in the result.
-             *
-             * The code below creates a key named "plume" inside of "ext" and
-             * fills it with summary experiments data.
-             */
-            try {
-                nlohmann::json root = nlohmann::json::parse(sp);
-                if (root["test_version"] == "0.0.4") {
-                    for (auto &test_s2c: root["test_keys"]["test_s2c"]) {
-                        // 1. find out test with three connections
-                        int num_streams = test_s2c["params"]["num_streams"];
-                        if (num_streams != 3) {
-                            continue;
-                        }
-                        auto ext = nlohmann::json::object();
-                        // 2. compute the ping
-                        std::vector<double> rtts = test_s2c["connect_times"];
-                        double sum = 0.0;
-                        for (auto &x: rtts) { sum += x; }
-                        double ping = 0.0;
-                        if (rtts.size() > 0) {
-                            ping = sum / rtts.size();
-                        }
-                        ext["plume"]["ping"] = ping;
-                        // 3. compute the download (v1, can be improved!)
-                        std::vector<double> speeds;
-                        for (auto &x: test_s2c["receiver_data"]) {
-                            speeds.push_back(x[1]);
-                        }
-                        std::sort(speeds.begin(), speeds.end());
-                        std::vector<double> good_speeds(
-                            // Note: going beyond vector limits would raise
-                            // a std::length_error exception
-                            speeds.begin() + 6, speeds.end() - 2
-                        );
-                        sum = 0.0;
-                        for (auto &x: good_speeds) { sum += x; };
-                        double download;
-                        if (good_speeds.size() > 0) {
-                            download = sum / good_speeds.size();
-                        }
-                        ext["plume"]["download"] = download;
-                        // 3. upload (FIXME: still to be done)
-                        // 4. extra info including vendor and versioning
-                        ext["plume"]["num_streams"] = num_streams;
-                        ext["plume"]["version"] = "0.0.1";
-                        root["test_keys"]["ext"] = ext;
-                        // 4. finally rewrite `sp`
-                        sp = root.dump(4);
-                    }
-                } else {
-                    // Conservative: we may not know how to handle this
-                    // version of the NDT test (some fields may vary)
-                }
-            } catch (...) {
-                // FALLTHROUGH
-            }
-            NSString *current = [NSString stringWithUTF8String:sp.c_str()];
+        // Properly route function containing structured test results
+        .on_entry([self](std::string s) {
+            nlohmann::json entry = nlohmann::json::parse(s);
+            nlohmann::json d = nlohmann::json::object();
+            d["simple"] = entry["test_keys"]["simple"];
+            d["advanced"] = entry["test_keys"]["advanced"];
+            NSString *os = [NSString stringWithUTF8String:d.dump(4).c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshFinalLogs" object:current];
+                 postNotificationName:@"refreshFinalLogs" object:os];
             });
         })
 
         // This basically runs the test in a background MK thread and
         // calls the callback passed as argument when complete
-        .run([self]() {
+        .start([self]() {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.finished = TRUE;
                 [[NSNotificationCenter defaultCenter]

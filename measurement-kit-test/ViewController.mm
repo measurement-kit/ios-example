@@ -5,7 +5,6 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
@@ -17,19 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"TEST";
+    self.title = @"Network performance test";
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshTestLogs:) name:@"refreshTestLogs"
-     object:nil];
+     addObserver:self selector:@selector(refreshTestLogs:)
+     name:@"refreshTestLogs" object:nil];
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshProgressLogs:) name:@"refreshProgressLogs"
-     object:nil];
+     addObserver:self selector:@selector(refreshProgressLogs:)
+     name:@"refreshProgressLogs" object:nil];
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshFinalLogs:) name:@"refreshFinalLogs"
-     object:nil];
+     addObserver:self selector:@selector(refreshFinalLogs:)
+     name:@"refreshFinalLogs" object:nil];
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(testComplete) name:@"testComplete"
-     object:nil];
+     addObserver:self selector:@selector(testComplete)
+     name:@"testComplete" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
