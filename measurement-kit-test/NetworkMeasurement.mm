@@ -48,11 +48,11 @@
 
         // Properly route information regarding percentage of completion
         .on_progress([](double prog, const char *s) {
-            NSString *os = [NSString stringWithFormat:@"Progress: %.1f%%: %s",
+            NSString *os = [NSString stringWithFormat:@"[%.1f%%] %s",
                             prog * 100.0, s];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshTestLogs" object:os];
+                 postNotificationName:@"update_logs" object:os];
             });
         })
 
@@ -71,7 +71,7 @@
                              speed_unit.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshProgressLogs" object:os];
+                 postNotificationName:@"update_speed" object:os];
             });
         })
 
@@ -80,7 +80,7 @@
             NSString *os = [NSString stringWithUTF8String:s];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshTestLogs" object:os];
+                 postNotificationName:@"update_logs" object:os];
             });
         })
 
@@ -97,10 +97,10 @@
             nlohmann::json d = nlohmann::json::object();
             d["simple"] = entry["test_keys"]["simple"];
             d["advanced"] = entry["test_keys"]["advanced"];
-            NSString *os = [NSString stringWithUTF8String:d.dump(4).c_str()];
+            NSString *os = [NSString stringWithUTF8String:entry.dump(4).c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"refreshFinalLogs" object:os];
+                 postNotificationName:@"update_json" object:os];
             });
         })
 
@@ -110,7 +110,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.finished = TRUE;
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"testComplete" object:nil];
+                 postNotificationName:@"test_complete" object:nil];
             });
         });
 }

@@ -7,10 +7,9 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextView *finalLogs;
-@property (weak, nonatomic) IBOutlet UITextView *progressLogs;
-@property (weak, nonatomic) IBOutlet UITextView *testLogs;
-
+@property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+@property (weak, nonatomic) IBOutlet UITextView *resultsJsonTextView;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *runButton;
 @property (strong, nonatomic) NetworkMeasurement *selectedMeasurement;
 

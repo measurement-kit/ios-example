@@ -16,19 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Network performance test";
+    self.title = @"Network speedt test";
+
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshTestLogs:)
-     name:@"refreshTestLogs" object:nil];
+     addObserver:self selector:@selector(update_logs:)
+     name:@"update_logs" object:nil];
+
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshProgressLogs:)
-     name:@"refreshProgressLogs" object:nil];
+     addObserver:self selector:@selector(update_speed:)
+     name:@"update_speed" object:nil];
+
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(refreshFinalLogs:)
-     name:@"refreshFinalLogs" object:nil];
+     addObserver:self selector:@selector(update_json:)
+     name:@"update_json" object:nil];
+
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(testComplete)
-     name:@"testComplete" object:nil];
+     addObserver:self selector:@selector(test_complete)
+     name:@"test_complete" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,34 +42,32 @@
 
 - (IBAction)runTest:(id)sender{
     [self.runButton setEnabled:NO];
-    [self.testLogs setText:@""];
-    [self.progressLogs setText:@""];
-    [self.finalLogs setText:@""];
+    [self.resultsJsonTextView setText:@"{}"];
+    self.speedLabel.text = @"0.0 kbit/s";
     self.selectedMeasurement = [[NdtTest alloc] init];
     [self.selectedMeasurement run];
 }
 
--(void)refreshTestLogs:(NSNotification *)notification{
+-(void)update_logs:(NSNotification *)notification{
     NSString *log = [notification object];
-    log = [log stringByAppendingString:@"\n"];
-    self.testLogs.text = [[self.testLogs text] stringByAppendingString:log];
-    [self.testLogs scrollRangeToVisible:NSMakeRange([self.testLogs.text length], 0)];
+    self.statusLabel.text = log;
 }
 
--(void)refreshProgressLogs:(NSNotification *)notification{
+-(void)update_speed:(NSNotification *)notification{
     NSString *log = [notification object];
-    [self.progressLogs setText:log];
-    [self.progressLogs scrollRangeToVisible:NSMakeRange([self.progressLogs.text length], 0)];
+    self.speedLabel.text = log;
 }
 
--(void)refreshFinalLogs:(NSNotification *)notification{
+-(void)update_json:(NSNotification *)notification{
     NSString *log = [notification object];
-    [self.finalLogs setText:log];
-    [self.finalLogs scrollRangeToVisible:NSMakeRange([self.finalLogs.text length], 0)];
+    [self.resultsJsonTextView setText:log];
+    [self.resultsJsonTextView
+     scrollRangeToVisible:NSMakeRange(
+                                      [self.resultsJsonTextView.text
+                                       length], 0)];
 }
 
-
--(void)testComplete{
+-(void)test_complete{
     [self.runButton setEnabled:YES];
 }
 
