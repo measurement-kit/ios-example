@@ -6,14 +6,6 @@
 
 @interface NetworkMeasurement : NSObject
 
-@property NSString *name;
-@property NSNumber *test_id;
-@property NSString *status;
-@property BOOL finished;
++(void) run;
 
--(void) run;
-
-@end
-
-@interface NdtTest : NetworkMeasurement
 @end

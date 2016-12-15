@@ -9,25 +9,7 @@
 
 @implementation NetworkMeasurement
 
--(id) init {
-    self = [super init];
-    self.finished = false;
-    return self;
-}
-
--(void) run { /* to be overriden */ }
-
-@end
-
-@implementation NdtTest : NetworkMeasurement
-
--(id) init {
-    self = [super init];
-    self.name = @"ndt";
-    return self;
-}
-
--(void) run {
++(void) run {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *geoip_asn = [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"];
     NSString *geoip_country = [bundle pathForResource:@"GeoIP" ofType:@"dat"];
@@ -108,7 +90,6 @@
         // calls the callback passed as argument when complete
         .start([self]() {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.finished = TRUE;
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"test_complete" object:nil];
             });

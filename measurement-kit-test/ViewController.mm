@@ -44,8 +44,7 @@
     [self.runButton setEnabled:NO];
     [self.resultsJsonTextView setText:@"{}"];
     self.speedLabel.text = @"0.0 kbit/s";
-    self.selectedMeasurement = [[NdtTest alloc] init];
-    [self.selectedMeasurement run];
+    [NetworkMeasurement run];
 }
 
 -(void)update_logs:(NSNotification *)notification{
@@ -62,8 +61,7 @@
     NSString *log = [notification object];
     [self.resultsJsonTextView setText:log];
     [self.resultsJsonTextView
-     scrollRangeToVisible:NSMakeRange(
-                                      [self.resultsJsonTextView.text
+     scrollRangeToVisible:NSMakeRange([self.resultsJsonTextView.text
                                        length], 0)];
 }
 
