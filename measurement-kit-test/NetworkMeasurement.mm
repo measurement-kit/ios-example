@@ -60,11 +60,15 @@
         })
 
         // Properly route generic log messages emitted during the test
-        .on_log([self](uint32_t /*type*/, const char *s) {
-            NSString *os = [NSString stringWithUTF8String:s];
+        .on_log([self](uint32_t severity, const char *s) {
+            NSDictionary *user_info = @{
+                @"message": [NSString stringWithUTF8String:s],
+                @"severity": [NSNumber numberWithLong:severity]
+            };
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_logs" object:os];
+                 postNotificationName:@"update_logs"
+                 object:nil userInfo:user_info];
             });
         })
 

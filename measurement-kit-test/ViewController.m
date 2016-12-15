@@ -48,8 +48,7 @@
 }
 
 -(void)update_logs:(NSNotification *)notification {
-    NSString *log = [notification object];
-    self.logsLabel.text = log;
+    self.logsLabel.text = [[notification userInfo] objectForKey:@"message"];
 }
 
 -(void)update_progress:(NSNotification *)notification {
