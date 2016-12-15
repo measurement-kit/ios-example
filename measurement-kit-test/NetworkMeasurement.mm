@@ -74,10 +74,13 @@
 
         // Properly route function containing structured test results
         .on_entry([self](std::string s) {
-            NSString *os = [NSString stringWithUTF8String:s.c_str()];
+            NSDictionary *user_info = @{
+                @"entry": [NSString stringWithUTF8String:s.c_str()]
+            };
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_json" object:os];
+                 postNotificationName:@"update_json"
+                 object:nil userInfo:user_info];
             });
         })
 

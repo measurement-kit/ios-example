@@ -66,8 +66,8 @@
 }
 
 -(void)update_json:(NSNotification *)notification {
-    NSString *log = [notification object];
-    [self.resultsJsonTextView setText:log];
+    NSString *entry = [[notification userInfo] objectForKey:@"entry"];
+    [self.resultsJsonTextView setText:entry];
     [self.resultsJsonTextView
      scrollRangeToVisible:NSMakeRange([self.resultsJsonTextView.text
                                        length], 0)];
