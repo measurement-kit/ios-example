@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06306AC71D1AEE8D00A66C5D /* GeoIP.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC41D1AEE8D00A66C5D /* GeoIP.dat */; };
 		06306AC81D1AEE8D00A66C5D /* GeoIPASNum.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */; };
-		06306AC91D1AEE8D00A66C5D /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC61D1AEE8D00A66C5D /* cacert.pem */; };
 		9E636EA922E2C880A4EF3173 /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */; };
 		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
 		EDBC90CD1CE341B800CC20CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.m */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		06306AC41D1AEE8D00A66C5D /* GeoIP.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIP.dat; path = Resources/GeoIP.dat; sourceTree = "<group>"; };
 		06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIPASNum.dat; path = Resources/GeoIPASNum.dat; sourceTree = "<group>"; };
-		06306AC61D1AEE8D00A66C5D /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cacert.pem; path = Resources/cacert.pem; sourceTree = "<group>"; };
 		18A83302BFD31D4EED7B84CB /* Pods-measurement-kit-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.release.xcconfig"; sourceTree = "<group>"; };
 		6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-measurement-kit-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFBC8B259658E8ABDF12353 /* Pods-measurement-kit-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			children = (
 				06306AC41D1AEE8D00A66C5D /* GeoIP.dat */,
 				06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */,
-				06306AC61D1AEE8D00A66C5D /* cacert.pem */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -190,7 +187,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06306AC91D1AEE8D00A66C5D /* cacert.pem in Resources */,
 				06306AC71D1AEE8D00A66C5D /* GeoIP.dat in Resources */,
 				EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */,
 				06306AC81D1AEE8D00A66C5D /* GeoIPASNum.dat in Resources */,

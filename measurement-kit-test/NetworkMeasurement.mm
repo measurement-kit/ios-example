@@ -13,7 +13,6 @@
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *geoip_asn = [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"];
     NSString *geoip_country = [bundle pathForResource:@"GeoIP" ofType:@"dat"];
-    NSString *ca_cert = [bundle pathForResource:@"cacert" ofType:@"pem"];
 
     // Note: the emulator does not cope well with receiving
     // a signal of type SIGPIPE when the debugger is attached
@@ -65,9 +64,6 @@
                  postNotificationName:@"update_logs" object:os];
             });
         })
-
-        // Certificate Authority file to communicate with collector using https
-        .set_options("net/ca_bundle_path", [ca_cert UTF8String])
 
         // GeoIP files used to infer country and ISP ASnum
         .set_options("geoip_country_path", [geoip_country UTF8String])
