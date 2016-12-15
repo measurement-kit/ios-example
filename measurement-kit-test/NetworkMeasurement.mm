@@ -4,7 +4,6 @@
 
 #import "NetworkMeasurement.h"
 
-#import "measurement_kit/ext.hpp"
 #import "measurement_kit/nettests.hpp"
 
 @implementation NetworkMeasurement
@@ -71,11 +70,7 @@
 
         // Properly route function containing structured test results
         .on_entry([self](std::string s) {
-            nlohmann::json entry = nlohmann::json::parse(s);
-            nlohmann::json d = nlohmann::json::object();
-            d["simple"] = entry["test_keys"]["simple"];
-            d["advanced"] = entry["test_keys"]["advanced"];
-            NSString *os = [NSString stringWithUTF8String:entry.dump(4).c_str()];
+            NSString *os = [NSString stringWithUTF8String:s.c_str()];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"update_json" object:os];
