@@ -4,9 +4,6 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
-@end
-
 @implementation ViewController
 
 - (id)init {
@@ -16,7 +13,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Network speedt test";
 
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(update_logs:)
@@ -40,24 +36,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)runTest:(id)sender{
+- (IBAction)runTest:(id)sender {
     [self.runButton setEnabled:NO];
     [self.resultsJsonTextView setText:@"{}"];
     self.speedLabel.text = @"0.0 kbit/s";
     [NetworkMeasurement run];
 }
 
--(void)update_logs:(NSNotification *)notification{
+-(void)update_logs:(NSNotification *)notification {
     NSString *log = [notification object];
     self.statusLabel.text = log;
 }
 
--(void)update_speed:(NSNotification *)notification{
+-(void)update_speed:(NSNotification *)notification {
     NSString *log = [notification object];
     self.speedLabel.text = log;
 }
 
--(void)update_json:(NSNotification *)notification{
+-(void)update_json:(NSNotification *)notification {
     NSString *log = [notification object];
     [self.resultsJsonTextView setText:log];
     [self.resultsJsonTextView
@@ -65,7 +61,7 @@
                                        length], 0)];
 }
 
--(void)test_complete{
+-(void)test_complete {
     [self.runButton setEnabled:YES];
 }
 
