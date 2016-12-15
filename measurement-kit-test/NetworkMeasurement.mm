@@ -40,8 +40,13 @@
         })
 
         // Properly route structured events occurring during the test
-        // (Note: `nlohmann::json` is part of measurement-kit)
         .on_event([self](const char *s) {
+            /*
+             * Note: `nlohmann::json` is part of measurement-kit. You can
+             * perform parsing here without wondering too much about possible
+             * exceptions because the caller would filter exceptions caused
+             * e.g. by parsing JSON or accessing nonexistent JSON fields.
+             */
             nlohmann::json doc = nlohmann::json::parse(s);
             if (doc["type"] != "download-speed") {
                 return;
@@ -50,12 +55,18 @@
             std::string elapsed_unit = doc["elapsed"][1];
             double speed = doc["speed"][0];
             std::string speed_unit = doc["speed"][1];
-            NSString *os = [NSString stringWithFormat:@"%8.2f %s %10.2f %s\n",
-                             elapsed, elapsed_unit.c_str(), speed,
-                             speed_unit.c_str()];
+            NSDictionary *user_info = @{
+                @"speed": [NSNumber numberWithDouble:speed],
+                @"speed_unit": [NSString
+                                stringWithUTF8String:speed_unit.c_str()],
+                @"elapsed": [NSNumber numberWithDouble:elapsed],
+                @"elapsed_unit": [NSString
+                                  stringWithUTF8String:elapsed_unit.c_str()]
+            };
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_speed" object:os];
+                 postNotificationName:@"update_speed"
+                 object:nil userInfo:user_info];
             });
         })
 

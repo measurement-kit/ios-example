@@ -60,8 +60,13 @@
 }
 
 -(void)update_speed:(NSNotification *)notification {
-    NSString *log = [notification object];
-    self.speedLabel.text = log;
+    NSDictionary *user_info = [notification userInfo];
+    self.speedLabel.text =
+        [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
+         [[user_info objectForKey:@"elapsed"] doubleValue],
+         [user_info objectForKey:@"elapsed_unit"],
+         [[user_info objectForKey:@"speed"] doubleValue],
+         [user_info objectForKey:@"speed_unit"]];
 }
 
 -(void)update_json:(NSNotification *)notification {
