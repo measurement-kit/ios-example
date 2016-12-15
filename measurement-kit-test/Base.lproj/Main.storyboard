@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YZT-ym-aUy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YZT-ym-aUy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,13 +38,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measured speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BG6-k4-FYv" userLabel="measured-speed-title">
-                                <rect key="frame" x="2" y="64" width="371" height="20"/>
+                                <rect key="frame" x="2" y="64" width="371" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 kbit/s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuP-vR-I5f" userLabel="speed-label">
-                                <rect key="frame" x="16" y="84" width="343" height="14"/>
+                                <rect key="frame" x="16" y="85" width="343" height="14"/>
                                 <accessibility key="accessibilityConfiguration" label="ready">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -54,25 +54,41 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results JSON" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZS-7R-1mr" userLabel="results-json-title">
-                                <rect key="frame" x="2" y="98" width="371" height="20"/>
+                                <rect key="frame" x="2" y="99" width="371" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="{}" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko2-Vg-k6B" userLabel="results-json-text-view">
-                                <rect key="frame" x="16" y="118" width="343" height="511"/>
+                                <rect key="frame" x="16" y="120" width="343" height="473"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqX-uK-W2g" userLabel="status-title">
-                                <rect key="frame" x="2" y="629" width="371" height="20"/>
+                                <rect key="frame" x="2" y="628" width="371" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ready" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgI-lo-Ly6" userLabel="status-label">
-                                <rect key="frame" x="16" y="649" width="343" height="13.5"/>
+                                <rect key="frame" x="16" y="649" width="343" height="14"/>
+                                <accessibility key="accessibilityConfiguration" label="ready">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiK-vv-SV5" userLabel="logs-title">
+                                <rect key="frame" x="2" y="593" width="371" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hn-nT-o1N" userLabel="logs-label">
+                                <rect key="frame" x="16" y="614" width="343" height="14"/>
                                 <accessibility key="accessibilityConfiguration" label="ready">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -87,6 +103,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Ko2-Vg-k6B" secondAttribute="trailing" id="1Mk-Uo-Uji"/>
                             <constraint firstItem="tuP-vR-I5f" firstAttribute="top" secondItem="BG6-k4-FYv" secondAttribute="bottom" id="840-i0-jXL"/>
                             <constraint firstItem="9ZS-7R-1mr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="8xW-tr-0fz"/>
+                            <constraint firstItem="kqX-uK-W2g" firstAttribute="top" secondItem="7hn-nT-o1N" secondAttribute="bottom" id="92O-6b-KYM"/>
+                            <constraint firstItem="fiK-vv-SV5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="Gr9-sv-Kbc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fgI-lo-Ly6" secondAttribute="bottom" constant="4" id="HUk-1X-mIS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tuP-vR-I5f" secondAttribute="trailing" id="ImZ-ZA-jm5"/>
                             <constraint firstItem="fgI-lo-Ly6" firstAttribute="top" secondItem="kqX-uK-W2g" secondAttribute="bottom" id="JfC-cC-hXo"/>
@@ -95,14 +113,18 @@
                             <constraint firstItem="Ko2-Vg-k6B" firstAttribute="top" secondItem="9ZS-7R-1mr" secondAttribute="bottom" id="T52-um-jlG"/>
                             <constraint firstItem="BG6-k4-FYv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="T7Q-4h-5Yl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kqX-uK-W2g" secondAttribute="trailing" constant="-14" id="TlL-vb-p92"/>
+                            <constraint firstItem="fiK-vv-SV5" firstAttribute="top" secondItem="Ko2-Vg-k6B" secondAttribute="bottom" id="aaG-fa-JMQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BG6-k4-FYv" secondAttribute="trailing" constant="-14" id="cEv-6Z-1Sr"/>
                             <constraint firstItem="fgI-lo-Ly6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gmY-Yi-rfb"/>
                             <constraint firstAttribute="leadingMargin" secondItem="tuP-vR-I5f" secondAttribute="leading" id="krJ-fq-5iq"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="7hn-nT-o1N" secondAttribute="leading" id="oBG-GI-k8K"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Ko2-Vg-k6B" secondAttribute="leading" id="oax-nW-Z2a"/>
                             <constraint firstItem="9ZS-7R-1mr" firstAttribute="top" secondItem="tuP-vR-I5f" secondAttribute="bottom" id="qEM-I2-mbe"/>
-                            <constraint firstItem="kqX-uK-W2g" firstAttribute="top" secondItem="Ko2-Vg-k6B" secondAttribute="bottom" id="vhY-4M-Tfg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7hn-nT-o1N" secondAttribute="trailing" id="tle-5f-eQA"/>
                             <constraint firstItem="BG6-k4-FYv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="w3F-FX-0a3"/>
                             <constraint firstItem="kqX-uK-W2g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-14" id="wcR-YP-7PY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fiK-vv-SV5" secondAttribute="trailing" constant="-14" id="wsm-hq-P6C"/>
+                            <constraint firstItem="7hn-nT-o1N" firstAttribute="top" secondItem="fiK-vv-SV5" secondAttribute="bottom" id="x3G-7n-gzu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Oc1-aB-Mdo">
@@ -113,6 +135,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logsLabel" destination="7hn-nT-o1N" id="7l7-jj-iO9"/>
                         <outlet property="resultsJsonTextView" destination="Ko2-Vg-k6B" id="Jqd-Wr-f16"/>
                         <outlet property="runButton" destination="xvE-gd-kGj" id="jcL-Mv-L0F"/>
                         <outlet property="speedLabel" destination="tuP-vR-I5f" id="ga5-ts-gNv"/>

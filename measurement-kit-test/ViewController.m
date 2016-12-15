@@ -19,6 +19,10 @@
      name:@"update_logs" object:nil];
 
     [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(update_progress:)
+     name:@"update_progress" object:nil];
+
+    [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(update_speed:)
      name:@"update_speed" object:nil];
 
@@ -45,7 +49,15 @@
 
 -(void)update_logs:(NSNotification *)notification {
     NSString *log = [notification object];
-    self.statusLabel.text = log;
+    self.logsLabel.text = log;
+}
+
+-(void)update_progress:(NSNotification *)notification {
+    NSDictionary *user_info = [notification userInfo];
+    NSNumber *progress = [user_info objectForKey:@"percentage"];
+    NSString *action = [user_info objectForKey:@"message"];
+    self.statusLabel.text = [NSString stringWithFormat:@"[%.1f%%] %@",
+                             [progress doubleValue] * 100.0, action];
 }
 
 -(void)update_speed:(NSNotification *)notification {

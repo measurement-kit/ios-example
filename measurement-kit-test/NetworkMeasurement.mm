@@ -28,15 +28,19 @@
 
         // Properly route information regarding percentage of completion
         .on_progress([](double prog, const char *s) {
-            NSString *os = [NSString stringWithFormat:@"[%.1f%%] %s",
-                            prog * 100.0, s];
+            NSDictionary *user_info = @{
+                @"percentage": [NSNumber numberWithDouble:prog],
+                @"message": [NSString stringWithUTF8String:s]
+            };
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_logs" object:os];
+                 postNotificationName:@"update_progress"
+                 object:nil userInfo:user_info];
             });
         })
 
         // Properly route structured events occurring during the test
+        // (Note: `nlohmann::json` is part of measurement-kit)
         .on_event([self](const char *s) {
             nlohmann::json doc = nlohmann::json::parse(s);
             if (doc["type"] != "download-speed") {
