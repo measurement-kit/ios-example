@@ -17,7 +17,6 @@
 		EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D41CE341B800CC20CF /* Assets.xcassets */; };
 		EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */; };
 		EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */; };
-		EDBC90E31CE34B6E00CC20CF /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDBC90E31CE34B6E00CC20CF /* libresolv.9.tbd in Frameworks */,
 				9E636EA922E2C880A4EF3173 /* libPods-measurement-kit-test.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +376,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openobservatory.mk.ios.BaseApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -396,7 +394,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openobservatory.mk.ios.BaseApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
