@@ -1,5 +1,5 @@
 PODS:
-  - measurement_kit (0.4.0-alpha.2)
+  - measurement_kit (0.4.0-alpha.3)
 
 DEPENDENCIES:
   - measurement_kit (from `https://github.com/measurement-kit/measurement-kit.git`, branch `stable`)
@@ -11,11 +11,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: de5d7dd4903b3fbb9e1701ab2cddeab7fa848876
+    :commit: 1bfa5462d50160cf9ac72c8672f94da450657604
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 SPEC CHECKSUMS:
-  measurement_kit: ecea28e18623c81e41d5429793934e0a50310692
+  measurement_kit: f78713e452465f5ec885162428e78cc708c51381
 
 PODFILE CHECKSUM: 176473d7cc59f0d1e46ac301ef073c081070129d
 
