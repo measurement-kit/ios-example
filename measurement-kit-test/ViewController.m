@@ -68,7 +68,7 @@
 
 -(void)update_speed:(NSNotification *)notification {
     NSDictionary *user_info = [notification userInfo];
-    self.speedLabel.text =
+    self.statusLabel.text =
         [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
          [[user_info objectForKey:@"elapsed"] doubleValue],
          [user_info objectForKey:@"elapsed_unit"],
