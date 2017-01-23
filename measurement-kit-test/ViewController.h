@@ -11,7 +11,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *resultsJsonTextView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *runButton;
-@property (weak, nonatomic) IBOutlet UILabel *logsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *logsTextView;
 
 @end
 

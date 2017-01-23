@@ -43,12 +43,19 @@
 - (IBAction)runTest:(id)sender {
     [self.runButton setEnabled:NO];
     [self.resultsJsonTextView setText:@"{}"];
+    [self.logsTextView setText:@""];
     self.speedLabel.text = @"0.0 kbit/s";
     [NetworkMeasurement run];
 }
 
 -(void)update_logs:(NSNotification *)notification {
-    self.logsLabel.text = [[notification userInfo] objectForKey:@"message"];
+    NSString *entry = [[notification userInfo] objectForKey:@"message"];
+    self.logsTextView.text = [self.logsTextView.text
+                              stringByAppendingString:[
+                              entry stringByAppendingString:@"\n"]];
+    [self.logsTextView
+     scrollRangeToVisible:NSMakeRange([self.logsTextView.text
+                                       length], 0)];
 }
 
 -(void)update_progress:(NSNotification *)notification {
