@@ -7,7 +7,7 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *verboseSwitch;
 @property (weak, nonatomic) IBOutlet UITextView *resultsJsonTextView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *runButton;

@@ -44,8 +44,7 @@
     [self.runButton setEnabled:NO];
     [self.resultsJsonTextView setText:@"{}"];
     [self.logsTextView setText:@""];
-    self.speedLabel.text = @"0.0 kbit/s";
-    [NetworkMeasurement run];
+    [NetworkMeasurement run:self.verboseSwitch.isOn];
 }
 
 -(void)update_logs:(NSNotification *)notification {

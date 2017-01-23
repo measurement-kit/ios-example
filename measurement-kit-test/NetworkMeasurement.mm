@@ -8,7 +8,7 @@
 
 @implementation NetworkMeasurement
 
-+(void) run {
++(void) run:(BOOL)verbose {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *geoip_asn = [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"];
     NSString *geoip_country = [bundle pathForResource:@"GeoIP" ofType:@"dat"];
@@ -19,9 +19,8 @@
 
     mk::nettests::MultiNdtTest()
 
-        // Set verbosity level such that we see what's happening but many
-        // debugging related info isn't shown to the user
-        .set_verbosity(MK_LOG_INFO)
+        // In production MK_LOG_INFO is recommended
+        .set_verbosity((verbose) ? MK_LOG_DEBUG : MK_LOG_INFO)
 
         // Make sure we are not going to write any file on the disk
         .set_options("no_file_report", "1")
