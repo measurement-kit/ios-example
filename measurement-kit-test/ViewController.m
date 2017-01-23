@@ -41,8 +41,14 @@
 }
 
 - (IBAction)runTest:(id)sender {
+    /*
+     * Note: after the test we will make the textViews editable to allow
+     * the user to select all logs and share with us.
+     */
     [self.runButton setEnabled:NO];
+    [self.resultsJsonTextView setEditable:FALSE];
     [self.resultsJsonTextView setText:@"{}"];
+    [self.logsTextView setEditable:FALSE];
     [self.logsTextView setText:@""];
     [NetworkMeasurement run:self.verboseSwitch.isOn];
 }
@@ -85,6 +91,8 @@
 
 -(void)test_complete {
     [self.runButton setEnabled:YES];
+    [self.resultsJsonTextView setEditable:TRUE];
+    [self.logsTextView setEditable:TRUE];
 }
 
 @end
