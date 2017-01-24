@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: 6021e518ea3e046ff747c3148741ef77c452519e
+    :commit: a819578cfa8b0153fa22225df6ca1c7d43e27db0
     :git: https://github.com/measurement-kit/measurement-kit.git
 
 SPEC CHECKSUMS:
