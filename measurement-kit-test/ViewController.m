@@ -41,14 +41,26 @@
 }
 
 - (IBAction)runTest:(id)sender {
+    /*
+     * Note: after the test we will make the textViews editable to allow
+     * the user to select all logs and share with us.
+     */
     [self.runButton setEnabled:NO];
+    [self.resultsJsonTextView setEditable:FALSE];
     [self.resultsJsonTextView setText:@"{}"];
-    self.speedLabel.text = @"0.0 kbit/s";
-    [NetworkMeasurement run];
+    [self.logsTextView setEditable:FALSE];
+    [self.logsTextView setText:@""];
+    [NetworkMeasurement run:self.verboseSwitch.isOn];
 }
 
 -(void)update_logs:(NSNotification *)notification {
-    self.logsLabel.text = [[notification userInfo] objectForKey:@"message"];
+    NSString *entry = [[notification userInfo] objectForKey:@"message"];
+    self.logsTextView.text = [self.logsTextView.text
+                              stringByAppendingString:[
+                              entry stringByAppendingString:@"\n"]];
+    [self.logsTextView
+     scrollRangeToVisible:NSMakeRange([self.logsTextView.text
+                                       length], 0)];
 }
 
 -(void)update_progress:(NSNotification *)notification {
@@ -61,7 +73,7 @@
 
 -(void)update_speed:(NSNotification *)notification {
     NSDictionary *user_info = [notification userInfo];
-    self.speedLabel.text =
+    self.statusLabel.text =
         [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
          [[user_info objectForKey:@"elapsed"] doubleValue],
          [user_info objectForKey:@"elapsed_unit"],
@@ -79,6 +91,8 @@
 
 -(void)test_complete {
     [self.runButton setEnabled:YES];
+    [self.resultsJsonTextView setEditable:TRUE];
+    [self.logsTextView setEditable:TRUE];
 }
 
 @end

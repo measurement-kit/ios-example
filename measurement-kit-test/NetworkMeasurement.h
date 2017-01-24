@@ -6,6 +6,6 @@
 
 @interface NetworkMeasurement : NSObject
 
-+(void) run;
++(void) run:(BOOL)verbose;
 
 @end
