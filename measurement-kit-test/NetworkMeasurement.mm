@@ -4,6 +4,8 @@
 
 #import "NetworkMeasurement.h"
 
+#import "measurement_kit/common.hpp"
+#import "measurement_kit/ext/json.hpp"
 #import "measurement_kit/nettests.hpp"
 
 @implementation NetworkMeasurement
@@ -17,7 +19,7 @@
     // a signal of type SIGPIPE when the debugger is attached
     // See http://stackoverflow.com/questions/1294436
 
-    mk::nettests::MultiNdtTest()
+    mk::nettests::NdtTest()
 
         // In production MK_LOG_INFO is recommended
         .set_verbosity((verbose) ? MK_LOG_DEBUG : MK_LOG_INFO)
