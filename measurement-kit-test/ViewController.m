@@ -53,22 +53,28 @@
     [NetworkMeasurement run:self.verboseSwitch.isOn];
 }
 
--(void)update_logs:(NSNotification *)notification {
-    NSString *entry = [[notification userInfo] objectForKey:@"message"];
+-(void)do_update_logs:(NSString *)entry {
     self.logsTextView.text = [self.logsTextView.text
                               stringByAppendingString:[
                               entry stringByAppendingString:@"\n"]];
     [self.logsTextView
      scrollRangeToVisible:NSMakeRange([self.logsTextView.text
                                        length], 0)];
+
+}
+
+-(void)update_logs:(NSNotification *)notification {
+    NSString *entry = [[notification userInfo] objectForKey:@"message"];
+    [self do_update_logs:entry];
 }
 
 -(void)update_progress:(NSNotification *)notification {
     NSDictionary *user_info = [notification userInfo];
     NSNumber *progress = [user_info objectForKey:@"percentage"];
     NSString *action = [user_info objectForKey:@"message"];
-    self.statusLabel.text = [NSString stringWithFormat:@"[%.1f%%] %@",
-                             [progress doubleValue] * 100.0, action];
+    NSString *entry = [NSString stringWithFormat:@"[%.1f%%] %@",
+                       [progress doubleValue] * 100.0, action];
+    [self do_update_logs:entry];
 }
 
 -(void)update_speed:(NSNotification *)notification {

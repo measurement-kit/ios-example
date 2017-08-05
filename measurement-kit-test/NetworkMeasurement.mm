@@ -49,9 +49,6 @@
              * e.g. by parsing JSON or accessing nonexistent JSON fields.
              */
             nlohmann::json doc = nlohmann::json::parse(s);
-            if (doc["type"] != "download-speed") {
-                return;
-            }
             double elapsed = doc["elapsed"][0];
             std::string elapsed_unit = doc["elapsed"][1];
             double speed = doc["speed"][0];
