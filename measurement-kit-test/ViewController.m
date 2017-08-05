@@ -64,14 +64,30 @@
 }
 
 -(void)update_logs:(NSNotification *)notification {
-    NSString *entry = [[notification userInfo] objectForKey:@"message"];
+    NSDictionary *user_info = [notification userInfo];
+    if (user_info == nil) {
+        return;
+    }
+    NSString *entry = [user_info objectForKey:@"message"];
+    if (entry == nil) {
+        return;
+    }
     [self do_update_logs:entry];
 }
 
 -(void)update_progress:(NSNotification *)notification {
     NSDictionary *user_info = [notification userInfo];
+    if (user_info == nil) {
+        return;
+    }
     NSNumber *progress = [user_info objectForKey:@"percentage"];
+    if (progress == nil) {
+        return;
+    }
     NSString *action = [user_info objectForKey:@"message"];
+    if (action == nil) {
+        return;
+    }
     NSString *entry = [NSString stringWithFormat:@"[%.1f%%] %@",
                        [progress doubleValue] * 100.0, action];
     [self do_update_logs:entry];
@@ -79,16 +95,31 @@
 
 -(void)update_speed:(NSNotification *)notification {
     NSDictionary *user_info = [notification userInfo];
+    if (user_info == nil) {
+        return;
+    }
+    NSNumber *elapsed = [user_info objectForKey:@"elapsed"];
+    NSString *elapsed_unit = [user_info objectForKey:@"elapsed_unit"];
+    NSNumber *speed = [user_info objectForKey:@"speed"];
+    NSString *speed_unit = [user_info objectForKey:@"speed_unit"];
+    if (elapsed == nil || elapsed_unit == nil || speed == nil ||
+        speed_unit == nil) {
+        return;
+    }
     self.statusLabel.text =
         [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
-         [[user_info objectForKey:@"elapsed"] doubleValue],
-         [user_info objectForKey:@"elapsed_unit"],
-         [[user_info objectForKey:@"speed"] doubleValue],
-         [user_info objectForKey:@"speed_unit"]];
+         [elapsed doubleValue], elapsed_unit, [speed doubleValue], speed_unit];
 }
 
 -(void)update_json:(NSNotification *)notification {
-    NSString *entry = [[notification userInfo] objectForKey:@"entry"];
+    NSDictionary *user_info = [notification userInfo];
+    if (user_info == nil) {
+        return;
+    }
+    NSString *entry = [user_info objectForKey:@"entry"];
+    if (entry == nil) {
+        return;
+    }
     [self.resultsJsonTextView setText:entry];
     [self.resultsJsonTextView
      scrollRangeToVisible:NSMakeRange([self.resultsJsonTextView.text
