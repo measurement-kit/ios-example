@@ -5,7 +5,7 @@
 #import "NetworkMeasurement.h"
 
 #import "measurement_kit/common.hpp"
-#import "measurement_kit/ext/json.hpp"
+#import "measurement_kit/common/nlohmann/json.hpp"
 #import "measurement_kit/nettests.hpp"
 
 @implementation NetworkMeasurement
@@ -25,7 +25,7 @@
         .set_verbosity((verbose) ? MK_LOG_DEBUG : MK_LOG_INFO)
 
         // Make sure we are not going to write any file on the disk
-        .set_options("no_file_report", "1")
+        .set_option("no_file_report", "1")
 
         // Properly route information regarding percentage of completion
         .on_progress([](double prog, const char *s) {
@@ -82,8 +82,8 @@
         })
 
         // GeoIP files used to infer country and ISP ASnum
-        .set_options("geoip_country_path", [geoip_country UTF8String])
-        .set_options("geoip_asn_path", [geoip_asn UTF8String])
+        .set_option("geoip_country_path", [geoip_country UTF8String])
+        .set_option("geoip_asn_path", [geoip_asn UTF8String])
 
         // Properly route function containing structured test results
         .on_entry([self](std::string s) {
