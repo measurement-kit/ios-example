@@ -4,74 +4,24 @@
 
 #import "NetworkMeasurement.h"
 
-#import "measurement_kit/nettest.hpp"
+#include <memory>
 
-// You can write less by using a `using namespace` declaration.
-using namespace mk::nettest;
+#import "measurement_kit/ffi.h"
 
-// Specialize Nettest to route the events you care about. Since all tests
-// run as Nettest, you do not need to specialize a class per test.
-class NettestRouter : public Nettest {
- public:
-  using Nettest::Nettest;
-
-  // Properly route information regarding percentage of completion
-  void on_status_progress(StatusProgressEvent event) override {
-    NSDictionary *user_info = @{
-      @"percentage": [NSNumber numberWithDouble:event.percentage],
-      @"message": [NSString stringWithUTF8String:event.message.data()]
-    };
-    // Route event to the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"update_progress"
-        object:nil userInfo:user_info];
-    });
-  }
-
-  // Properly route performance events
-  void on_status_update_performance(StatusUpdatePerformanceEvent event) override {
-    NSDictionary *user_info = @{
-      @"speed": [NSNumber numberWithDouble:event.speed_kbps],
-      @"speed_unit": @"kbit/s",
-      @"elapsed": [NSNumber numberWithDouble:event.elapsed],
-      @"elapsed_unit": @"s",
-    };
-    // Route event to the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"update_speed"
-        object:nil userInfo:user_info];
-    });
-  }
-
-  // Properly route generic log messages emitted during the test
-  void on_log(LogEvent event) override {
-    NSDictionary *user_info = @{
-      @"message": [NSString stringWithUTF8String:event.message.data()],
-      @"log_level": [NSString stringWithUTF8String:event.log_level.data()]
-    };
-    // Route event to the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"update_logs"
-        object:nil userInfo:user_info];
-    });
-  }
-
-  // Properly route function containing structured test results
-  void on_measurement(MeasurementEvent event) override {
-    NSDictionary *user_info = @{
-      @"entry": [NSString stringWithUTF8String:event.json_str.data()]
-    };
-    // Route event to the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter]
-        postNotificationName:@"update_json"
-        object:nil userInfo:user_info];
-    });
-  }
+// XXX This should be part of the FFI API
+namespace x {
+class TaskDeleter {
+  public:
+    void operator()(mk_task_t *task) noexcept { mk_task_destroy(task); }
 };
+using TaskUptr = std::unique_ptr<mk_task_t, TaskDeleter>;
+
+class EventDeleter {
+  public:
+    void operator()(mk_event_t *event) noexcept { mk_event_destroy(event); }
+};
+using EventUptr = std::unique_ptr<mk_event_t, EventDeleter>;
+} // namespace x
 
 @implementation NetworkMeasurement
 
@@ -80,30 +30,79 @@ class NettestRouter : public Nettest {
   // a signal of type SIGPIPE when the debugger is attached
   // See http://stackoverflow.com/questions/1294436
 
-  // Create nettest specific settings and configure them.
-  mk::nettest::NdtSettings config;
-  // GeoIP files used to infer country and ISP ASNum
-  config.geoip_country_path = [[[NSBundle mainBundle] pathForResource:@"GeoIP"
-                              ofType:@"dat"] UTF8String];
-  config.geoip_asn_path = [[[NSBundle mainBundle] pathForResource:@"GeoIPASNum"
-                          ofType:@"dat"] UTF8String];
-  // In production MK_LOG_INFO is recommended
-  config.log_level = (verbose) ? mk::nettest::log_level_debug
-                               : mk::nettest::log_level_info;
-  // Make sure we are not going to write any file on the disk
-  config.no_file_report = true;
+  // Serialize the settings to a JSON string.
+  NSString *serialized_settings = nil;
+  {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *settings = @{
+      @"log_level": (verbose) ? @"DEBUG" : @"INFO",
+      @"name": @"Ndt",
+      @"options": @{
+        @"geoip_country_path": [bundle pathForResource:@"GeoIP" ofType:@"dat"],
+        @"geoip_asn_path": [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"],
+        @"no_file_report": @1,
+      }
+    };
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:settings
+                    options:0 error:&error];
+    if (error != nil) {
+      NSLog(@"Cannot serialize settings to JSON");
+      return;
+    }
+    // Using initWithData because data is not terminated by zero.
+    serialized_settings = [[NSString alloc] initWithData:data
+                           encoding:NSUTF8StringEncoding];
+    if (serialized_settings == nil) {
+      NSLog(@"Cannot convert serialized JSON to string");
+      return;
+    }
+  }
+  //NSLog(@"settings: %@", serialized_settings); // Uncomment when debugging
 
-  // Submit the job of running the nettest on a background queue.
+  // The task runs in a background thread.
   dispatch_async(
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      NettestRouter nettest{config};
-      nettest.run();
-      // Notify the main thread that we are now complete
+      x::TaskUptr taskp{mk_task_start([serialized_settings UTF8String])};
+      while (!mk_task_is_done(taskp.get())) {
+        // Extract an event from the task queue and unmarshal it.
+        NSDictionary *evinfo = nil;
+        {
+          x::EventUptr eventp{mk_task_wait_for_next_event(taskp.get())};
+          if (!eventp) {
+            NSLog(@"Cannot extract event");
+            break;
+          }
+          const char *s = mk_event_serialize(eventp.get());
+          if (s == nullptr) {
+            NSLog(@"Cannot serialize event");
+            break;
+          }
+          // Here it's important to specify freeWhenDone because we control
+          // the lifecycle of the data object using `eventp`.
+          NSData *data = [NSData dataWithBytesNoCopy:(void *)s length:strlen(s)
+                          freeWhenDone:NO];
+          NSError *error = nil;
+          evinfo = [NSJSONSerialization JSONObjectWithData:data
+                    options:0 error:&error];
+          if (error != nil) {
+            NSLog(@"Cannot parse serialized JSON event");
+            break;
+          }
+        }
+        assert(evinfo != nil);
+        // Notify the main thread about the latest event.
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[NSNotificationCenter defaultCenter]
+            postNotificationName:@"event" object:nil userInfo:evinfo];
+        });
+      }
+      // Notify the main thread that the task is now complete
       dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter]
           postNotificationName:@"test_complete" object:nil];
-        });
-    });
+      });
+  });
 }
 
 @end
