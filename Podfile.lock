@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: 5333ccfbce8d6dea15be32d62f7d66b37256fe53
+    :commit: bff44c1d679633c2e96d5b02df25678111b47c9e
     :git: https://github.com/measurement-kit/ios-libs.git
 
 SPEC CHECKSUMS:
