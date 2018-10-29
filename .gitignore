@@ -1,4 +1,5 @@
 .DS_Store
+/Carthage
 /Pods/
 /measurement-kit-test.xcodeproj/project.xcworkspace/xcshareddata/
 /measurement-kit-test.xcodeproj/project.xcworkspace/xcuserdata/lorenzo.xcuserdatad/

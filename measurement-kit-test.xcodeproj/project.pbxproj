@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		06306AC71D1AEE8D00A66C5D /* GeoIP.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC41D1AEE8D00A66C5D /* GeoIP.dat */; };
 		06306AC81D1AEE8D00A66C5D /* GeoIPASNum.dat in Resources */ = {isa = PBXBuildFile; fileRef = 06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */; };
-		9E636EA922E2C880A4EF3173 /* libPods-measurement-kit-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */; };
+		06BF359021869AF6008EAD71 /* mkall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BF358F21869AF6008EAD71 /* mkall.framework */; };
 		EDBC90CA1CE341B700CC20CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90C91CE341B700CC20CF /* main.m */; };
 		EDBC90CD1CE341B800CC20CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CC1CE341B800CC20CF /* AppDelegate.m */; };
 		EDBC90D01CE341B800CC20CF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90CF1CE341B800CC20CF /* ViewController.m */; };
@@ -22,9 +22,7 @@
 /* Begin PBXFileReference section */
 		06306AC41D1AEE8D00A66C5D /* GeoIP.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIP.dat; path = Resources/GeoIP.dat; sourceTree = "<group>"; };
 		06306AC51D1AEE8D00A66C5D /* GeoIPASNum.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoIPASNum.dat; path = Resources/GeoIPASNum.dat; sourceTree = "<group>"; };
-		18A83302BFD31D4EED7B84CB /* Pods-measurement-kit-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.release.xcconfig"; sourceTree = "<group>"; };
-		6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-measurement-kit-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAFBC8B259658E8ABDF12353 /* Pods-measurement-kit-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-measurement-kit-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-measurement-kit-test/Pods-measurement-kit-test.debug.xcconfig"; sourceTree = "<group>"; };
+		06BF358F21869AF6008EAD71 /* mkall.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mkall.framework; path = Carthage/Build/iOS/mkall.framework; sourceTree = "<group>"; };
 		EDBC90C51CE341B400CC20CF /* measurement-kit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "measurement-kit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBC90C91CE341B700CC20CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDBC90CB1CE341B800CC20CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E636EA922E2C880A4EF3173 /* libPods-measurement-kit-test.a in Frameworks */,
+				06BF359021869AF6008EAD71 /* mkall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,20 +59,11 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		52E261AD69BADDA94EFB2EB3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BAFBC8B259658E8ABDF12353 /* Pods-measurement-kit-test.debug.xcconfig */,
-				18A83302BFD31D4EED7B84CB /* Pods-measurement-kit-test.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		5CA3B24C6AC9D6376357B091 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06BF358F21869AF6008EAD71 /* mkall.framework */,
 				EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */,
-				6F0BDBAA2F75F2DBD2F5FF45 /* libPods-measurement-kit-test.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -85,7 +74,6 @@
 				EDBC90C71CE341B700CC20CF /* measurement-kit-test */,
 				EDBC90C61CE341B400CC20CF /* Products */,
 				5CA3B24C6AC9D6376357B091 /* Frameworks */,
-				52E261AD69BADDA94EFB2EB3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,7 +119,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDBC90DC1CE341B800CC20CF /* Build configuration list for PBXNativeTarget "measurement-kit-test" */;
 			buildPhases = (
-				30307381262792361D514DAF /* [CP] Check Pods Manifest.lock */,
+				06BF359121869B31008EAD71 /* ShellScript */,
 				EDBC90C11CE341B400CC20CF /* Sources */,
 				EDBC90C21CE341B400CC20CF /* Frameworks */,
 				EDBC90C31CE341B400CC20CF /* Resources */,
@@ -194,23 +182,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		30307381262792361D514DAF /* [CP] Check Pods Manifest.lock */ = {
+		06BF359121869B31008EAD71 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+			inputFileListPaths = (
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/mkall.framework",
+			);
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-measurement-kit-test-checkManifestLockResult.txt",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/mkall.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -356,13 +345,17 @@
 		};
 		EDBC90DD1CE341B800CC20CF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAFBC8B259658E8ABDF12353 /* Pods-measurement-kit-test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS/mkall.framework/Headers";
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -375,13 +368,17 @@
 		};
 		EDBC90DE1CE341B800CC20CF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18A83302BFD31D4EED7B84CB /* Pods-measurement-kit-test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS/mkall.framework/Headers";
 				INFOPLIST_FILE = "measurement-kit-test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
