@@ -16,7 +16,7 @@
 		EDBC90D31CE341B800CC20CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D11CE341B800CC20CF /* Main.storyboard */; };
 		EDBC90D51CE341B800CC20CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D41CE341B800CC20CF /* Assets.xcassets */; };
 		EDBC90D81CE341B800CC20CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */; };
-		EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */; };
+		EDBC90E11CE344A300CC20CF /* NetworkMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBC90E01CE344A300CC20CF /* NetworkMeasurement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		EDBC90D71CE341B800CC20CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDBC90D91CE341B800CC20CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMeasurement.h; sourceTree = "<group>"; };
-		EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkMeasurement.mm; sourceTree = "<group>"; };
+		EDBC90E01CE344A300CC20CF /* NetworkMeasurement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkMeasurement.m; sourceTree = "<group>"; };
 		EDBC90E21CE34B6E00CC20CF /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -94,7 +94,7 @@
 				EDBC90CE1CE341B800CC20CF /* ViewController.h */,
 				EDBC90CF1CE341B800CC20CF /* ViewController.m */,
 				EDBC90DF1CE344A300CC20CF /* NetworkMeasurement.h */,
-				EDBC90E01CE344A300CC20CF /* NetworkMeasurement.mm */,
+				EDBC90E01CE344A300CC20CF /* NetworkMeasurement.m */,
 				EDBC90D11CE341B800CC20CF /* Main.storyboard */,
 				EDBC90D41CE341B800CC20CF /* Assets.xcassets */,
 				EDBC90D61CE341B800CC20CF /* LaunchScreen.storyboard */,
@@ -209,7 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBC90D01CE341B800CC20CF /* ViewController.m in Sources */,
-				EDBC90E11CE344A300CC20CF /* NetworkMeasurement.mm in Sources */,
+				EDBC90E11CE344A300CC20CF /* NetworkMeasurement.m in Sources */,
 				EDBC90CD1CE341B800CC20CF /* AppDelegate.m in Sources */,
 				EDBC90CA1CE341B700CC20CF /* main.m in Sources */,
 			);
