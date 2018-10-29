@@ -4,107 +4,101 @@
 
 #import "NetworkMeasurement.h"
 
-#import "measurement_kit/common.hpp"
-#import "measurement_kit/common/nlohmann/json.hpp"
-#import "measurement_kit/nettests.hpp"
+#include <memory>
+
+#import "measurement_kit/ffi.h"
+
+// Serialize settings to JSON.
+static NSString *marshal_settings(NSDictionary *settings) {
+  NSString *serialized_settings = nil;
+  NSError *error = nil;
+  NSData *data = [NSJSONSerialization dataWithJSONObject:settings
+                  options:0 error:&error];
+  if (error != nil) {
+    NSLog(@"Cannot serialize settings to JSON");
+    return nil;
+  }
+  // Using initWithData because data is not terminated by zero.
+  serialized_settings = [[NSString alloc] initWithData:data
+                          encoding:NSUTF8StringEncoding];
+  if (serialized_settings == nil) {
+    NSLog(@"Cannot convert serialized JSON to string");
+    return nil;
+  }
+  return serialized_settings;
+}
+
+static NSDictionary *wait_for_next_event(mk_unique_task &taskp) {
+  mk_unique_event eventp{mk_task_wait_for_next_event(taskp.get())};
+  if (!eventp) {
+    NSLog(@"Cannot extract event");
+    return nil;
+  }
+  const char *s = mk_event_serialize(eventp.get());
+  if (s == nullptr) {
+    NSLog(@"Cannot serialize event");
+    return nil;
+  }
+  // Here it's important to specify freeWhenDone because we control
+  // the lifecycle of the data object using `eventp`.
+  NSData *data = [NSData dataWithBytesNoCopy:(void *)s length:strlen(s)
+                  freeWhenDone:NO];
+  NSError *error = nil;
+  NSDictionary *evinfo = [NSJSONSerialization JSONObjectWithData:data
+                          options:0 error:&error];
+  if (error != nil) {
+    NSLog(@"Cannot parse serialized JSON event");
+    return nil;
+  }
+  return evinfo;
+}
 
 @implementation NetworkMeasurement
 
 +(void) run:(BOOL)verbose {
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *geoip_asn = [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"];
-    NSString *geoip_country = [bundle pathForResource:@"GeoIP" ofType:@"dat"];
+  // Note: the emulator does not cope well with receiving
+  // a signal of type SIGPIPE when the debugger is attached
+  // See http://stackoverflow.com/questions/1294436
 
-    // Note: the emulator does not cope well with receiving
-    // a signal of type SIGPIPE when the debugger is attached
-    // See http://stackoverflow.com/questions/1294436
+  // Serialize the settings to a JSON string.
+  NSBundle *bundle = [NSBundle mainBundle];
+  NSDictionary *settings = @{
+    @"log_level": (verbose) ? @"DEBUG" : @"INFO",
+    @"name": @"Ndt",
+    @"options": @{
+      @"geoip_country_path": [bundle pathForResource:@"GeoIP" ofType:@"dat"],
+      @"geoip_asn_path": [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"],
+      @"no_file_report": @1,
+    }
+  };
+  NSString *serialized_settings = marshal_settings(settings);
+  if (serialized_settings == nil) {
+    return;
+  }
+  //NSLog(@"settings: %@", serialized_settings); // Uncomment when debugging
 
-    mk::nettests::NdtTest()
-
-        // In production MK_LOG_INFO is recommended
-        .set_verbosity((verbose) ? MK_LOG_DEBUG : MK_LOG_INFO)
-
-        // Make sure we are not going to write any file on the disk
-        .set_option("no_file_report", "1")
-
-        // Properly route information regarding percentage of completion
-        .on_progress([](double prog, const char *s) {
-            NSDictionary *user_info = @{
-                @"percentage": [NSNumber numberWithDouble:prog],
-                @"message": [NSString stringWithUTF8String:s]
-            };
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_progress"
-                 object:nil userInfo:user_info];
-            });
-        })
-
-        // Properly route structured events occurring during the test
-        .on_event([self](const char *s) {
-            /*
-             * Note: `nlohmann::json` is part of measurement-kit. You can
-             * perform parsing here without wondering too much about possible
-             * exceptions because the caller would filter exceptions caused
-             * e.g. by parsing JSON or accessing nonexistent JSON fields.
-             */
-            nlohmann::json doc = nlohmann::json::parse(s);
-            double elapsed = doc["elapsed"][0];
-            std::string elapsed_unit = doc["elapsed"][1];
-            double speed = doc["speed"][0];
-            std::string speed_unit = doc["speed"][1];
-            NSDictionary *user_info = @{
-                @"speed": [NSNumber numberWithDouble:speed],
-                @"speed_unit": [NSString
-                                stringWithUTF8String:speed_unit.c_str()],
-                @"elapsed": [NSNumber numberWithDouble:elapsed],
-                @"elapsed_unit": [NSString
-                                  stringWithUTF8String:elapsed_unit.c_str()]
-            };
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_speed"
-                 object:nil userInfo:user_info];
-            });
-        })
-
-        // Properly route generic log messages emitted during the test
-        .on_log([self](uint32_t severity, const char *s) {
-            NSDictionary *user_info = @{
-                @"message": [NSString stringWithUTF8String:s],
-                @"severity": [NSNumber numberWithLong:severity]
-            };
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_logs"
-                 object:nil userInfo:user_info];
-            });
-        })
-
-        // GeoIP files used to infer country and ISP ASnum
-        .set_option("geoip_country_path", [geoip_country UTF8String])
-        .set_option("geoip_asn_path", [geoip_asn UTF8String])
-
-        // Properly route function containing structured test results
-        .on_entry([self](std::string s) {
-            NSDictionary *user_info = @{
-                @"entry": [NSString stringWithUTF8String:s.c_str()]
-            };
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"update_json"
-                 object:nil userInfo:user_info];
-            });
-        })
-
-        // This basically runs the test in a background MK thread and
-        // calls the callback passed as argument when complete
-        .start([self]() {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"test_complete" object:nil];
-            });
+  // The task runs in a background thread.
+  dispatch_async(
+    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      mk_unique_task taskp{mk_nettest_start([serialized_settings UTF8String])};
+      while (!mk_task_is_done(taskp.get())) {
+        // Extract an event from the task queue and unmarshal it.
+        NSDictionary *evinfo = wait_for_next_event(taskp);
+        if (evinfo == nil) {
+          break;
+        }
+        // Notify the main thread about the latest event.
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[NSNotificationCenter defaultCenter]
+            postNotificationName:@"event" object:nil userInfo:evinfo];
         });
+      }
+      // Notify the main thread that the task is now complete
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]
+          postNotificationName:@"test_complete" object:nil];
+      });
+  });
 }
 
 @end

@@ -15,20 +15,8 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(update_logs:)
-     name:@"update_logs" object:nil];
-
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(update_progress:)
-     name:@"update_progress" object:nil];
-
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(update_speed:)
-     name:@"update_speed" object:nil];
-
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(update_json:)
-     name:@"update_json" object:nil];
+     addObserver:self selector:@selector(handle_event:)
+     name:@"event" object:nil];
 
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(test_complete)
@@ -53,6 +41,30 @@
     [NetworkMeasurement run:self.verboseSwitch.isOn];
 }
 
+-(void)handle_event:(NSNotification *)notification {
+    NSDictionary *evinfo = [notification userInfo];
+    if (evinfo == nil) {
+        return;
+    }
+    //NSLog(@"Got event: %@", evinfo); // Uncomment when debugging
+    NSString *key = [evinfo objectForKey:@"key"];
+    NSDictionary *value = [evinfo objectForKey:@"value"];
+    if (key == nil || value == nil) {
+        return;
+    }
+    if ([key isEqualToString:@"log"]) {
+        [self update_logs:value];
+    } else if ([key isEqualToString:@"status.progress"]) {
+        [self update_progress:value];
+    } else if ([key isEqualToString:@"status.update.performance"]) {
+        [self update_speed:value];
+    } else if ([key isEqualToString:@"measurement"]) {
+        [self update_json:value];
+    } else {
+        NSLog(@"unused event: %@", evinfo);
+    }
+}
+
 -(void)do_update_logs:(NSString *)entry {
     self.logsTextView.text = [self.logsTextView.text
                               stringByAppendingString:[
@@ -60,63 +72,41 @@
     [self.logsTextView
      scrollRangeToVisible:NSMakeRange([self.logsTextView.text
                                        length], 0)];
-
 }
 
--(void)update_logs:(NSNotification *)notification {
-    NSDictionary *user_info = [notification userInfo];
-    if (user_info == nil) {
+-(void)update_logs:(NSDictionary *)value {
+    NSString *message = [value objectForKey:@"message"];
+    if (message == nil) {
         return;
     }
-    NSString *entry = [user_info objectForKey:@"message"];
-    if (entry == nil) {
-        return;
-    }
-    [self do_update_logs:entry];
+    [self do_update_logs:message];
 }
 
--(void)update_progress:(NSNotification *)notification {
-    NSDictionary *user_info = [notification userInfo];
-    if (user_info == nil) {
-        return;
-    }
-    NSNumber *progress = [user_info objectForKey:@"percentage"];
-    if (progress == nil) {
-        return;
-    }
-    NSString *action = [user_info objectForKey:@"message"];
-    if (action == nil) {
+-(void)update_progress:(NSDictionary *)value {
+    NSNumber *percentage = [value objectForKey:@"percentage"];
+    NSString *message = [value objectForKey:@"message"];
+    if (percentage == nil || message == nil) {
         return;
     }
     NSString *entry = [NSString stringWithFormat:@"[%.1f%%] %@",
-                       [progress doubleValue] * 100.0, action];
+                       [percentage doubleValue] * 100.0, message];
     [self do_update_logs:entry];
 }
 
--(void)update_speed:(NSNotification *)notification {
-    NSDictionary *user_info = [notification userInfo];
-    if (user_info == nil) {
+-(void)update_speed:(NSDictionary *)value {
+    NSNumber *elapsed = [value objectForKey:@"elapsed"];
+    NSNumber *speed = [value objectForKey:@"speed_kbps"];
+    if (elapsed == nil || speed == nil) {
         return;
     }
-    NSNumber *elapsed = [user_info objectForKey:@"elapsed"];
-    NSString *elapsed_unit = [user_info objectForKey:@"elapsed_unit"];
-    NSNumber *speed = [user_info objectForKey:@"speed"];
-    NSString *speed_unit = [user_info objectForKey:@"speed_unit"];
-    if (elapsed == nil || elapsed_unit == nil || speed == nil ||
-        speed_unit == nil) {
-        return;
-    }
-    self.statusLabel.text =
-        [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
+    NSString *elapsed_unit = @"s";
+    NSString *speed_unit = @"Kbit/s";
+    self.statusLabel.text = [NSString stringWithFormat:@"%8.2f %@ %10.2f %@\n",
          [elapsed doubleValue], elapsed_unit, [speed doubleValue], speed_unit];
 }
 
--(void)update_json:(NSNotification *)notification {
-    NSDictionary *user_info = [notification userInfo];
-    if (user_info == nil) {
-        return;
-    }
-    NSString *entry = [user_info objectForKey:@"entry"];
+-(void)update_json:(NSDictionary *)value {
+    NSString *entry = [value objectForKey:@"json_str"];
     if (entry == nil) {
         return;
     }
