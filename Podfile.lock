@@ -1,5 +1,5 @@
 PODS:
-  - measurement_kit (0.9.0-alpha.9-1)
+  - measurement_kit (0.9.0-alpha.11-9)
 
 DEPENDENCIES:
   - measurement_kit (from `https://github.com/measurement-kit/ios-libs.git`)
@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   measurement_kit:
-    :commit: 45d0117581331aba4cdc1636050d4cfda29aa5d5
+    :commit: 55fcfd74d21b8de169049e46f1b56e7fd448b263
     :git: https://github.com/measurement-kit/ios-libs.git
 
 SPEC CHECKSUMS:
-  measurement_kit: cc0c26b5aba94e6173d29197c091e2f598d89209
+  measurement_kit: 06c6f29dc5ebeae64321d08b6ffb595446560cfb
 
 PODFILE CHECKSUM: dfde9a8b19b103302aad1a5eee6d8166b862374b
 
