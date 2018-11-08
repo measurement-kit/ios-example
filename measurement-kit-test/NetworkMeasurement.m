@@ -4,7 +4,8 @@
 
 #import "NetworkMeasurement.h"
 
-#import "MkTask.h"
+#import "MKTask.h"
+#import "MKResources.h"
 
 @implementation NetworkMeasurement
 
@@ -13,20 +14,20 @@
   // a signal of type SIGPIPE when the debugger is attached
   // See http://stackoverflow.com/questions/1294436
 
-  NSBundle *bundle = [NSBundle mainBundle];
   NSDictionary *settings = @{
     @"log_level": (verbose) ? @"DEBUG" : @"INFO",
     @"name": @"Ndt",
     @"options": @{
-      @"geoip_country_path": [bundle pathForResource:@"GeoIP" ofType:@"dat"],
-      @"geoip_asn_path": [bundle pathForResource:@"GeoIPASNum" ofType:@"dat"],
+      @"geoip_country_path": [MKResources getMMDBCountryPath],
+      @"geoip_asn_path": [MKResources getMMDBASNPath],
+      @"net/ca_bundle_path": [MKResources getCABundlePath],
       @"no_file_report": @YES,
     }
   };
 
   dispatch_async(
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      MkTask *task = [MkTask startNettest:settings];
+      MKTask *task = [MKTask startNettest:settings];
       while (![task isDone]) {
         // Extract an event from the task queue and unmarshal it.
         NSDictionary *evinfo = [task waitForNextEvent];
