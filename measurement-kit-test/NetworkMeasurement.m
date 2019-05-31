@@ -4,8 +4,7 @@
 
 #import "NetworkMeasurement.h"
 
-#import "MKTask.h"
-#import "MKResources.h"
+#import "MKAsyncTask.h"
 
 @implementation NetworkMeasurement
 
@@ -18,17 +17,14 @@
     @"log_level": (verbose) ? @"DEBUG" : @"INFO",
     @"name": @"Ndt",
     @"options": @{
-      @"geoip_country_path": [MKResources mmdbCountryPath],
-      @"geoip_asn_path": [MKResources mmdbASNPath],
-      @"net/ca_bundle_path": [MKResources caBundlePath],
       @"no_file_report": @YES,
     }
   };
 
   dispatch_async(
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      MKTask *task = [MKTask start:settings];
-      while (![task isDone]) {
+      MKAsyncTask *task = [MKAsyncTask start:settings];
+      while (![task done]) {
         // Extract an event from the task queue and unmarshal it.
         NSDictionary *evinfo = [task waitForNextEvent];
         if (evinfo == nil) abort();
