@@ -1,5 +1,7 @@
 # Barebone Measurement Kit iOS app
 
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️: unused and archived repository!
+
 Instructions for building the experimental barebone [Measurement
 Kit](https://github.com/measurement-kit) (MK) iOS app with support
 for the [NDT network performance test](
